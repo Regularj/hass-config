@@ -6,10 +6,11 @@
 www
 OZW_Log.txt
 home-assistant.log
-home-assistant_v2.db
+home-assistant_*.db
 *.db-journal
 lib
 deps
+*.conf
 tts
 secrets.yaml
 known_devices.yaml
