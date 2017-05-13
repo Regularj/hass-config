@@ -14,7 +14,7 @@ iss:
   name: International Space Station
   entities:
     - binary_sensor.iss
- 
+
 zimmerdetails:
   name: Übersicht Zimmer
   view: yes
@@ -92,7 +92,11 @@ hasspi:
   entities:
     - sensor.since_last_boot_templated
 
-media: media_player.kodi
+media:
+  name: Media
+  entities:
+    - media_player.kodi
+    - media_player.vlc
 
 nzbget:
   name: NZBGet
@@ -121,6 +125,24 @@ hintergrundtechnik:
     - group.szenen
     - group.switches
     - group.automatismen
+    - group.applehomekit
+applehomekit:
+  name: Apple Homekit
+  entities:
+    - binary_sensor.stephanishome
+#    - group.boolean
+
+#boolean:
+#  name: Input Boolean
+#  entities:
+#    - input_boolean.schlafzimmer_feucht
+#    - input_boolean.schlafzimmer_kalt
+#    - input_boolean.wohnzimmer_feucht
+#    - input_boolean.wohnzimmer_kalt
+#    - input_boolean.bad_feucht
+#    - input_boolean.bad_kalt
+#    - input_boolean.spielzimmer_feucht
+#    - input_boolean.spielzimmer_kalt
 szenen:
   name: Szenen
   entities:
@@ -139,6 +161,18 @@ automatismen:
     - automation.media_player_playing
     - automation.media_player_pausedstopped
     - automation.update_benachrichtigungen
+    - automation.keine_alarme
+    - automation.alarme_neustart
+    - automation.fluxer_start
+#    - automation.schlafzimmer_feuchtigkeitsalarm_aktivieren
+#    - automation.schlafzimmer_temperaturalarm_aktivieren
+#    - automation.wohnzimmer_feuchtigkeitsalarm_aktivieren
+#    - automation.wohnzimmer_temperaturalarm_aktivieren
+#    - automation.spielzimmer_feuchtigkeitsalarm_aktivieren
+#    - automation.spielzimmer_temperaturalarm_aktivieren
+#    - automation.bad_feuchtigkeitsalarm_aktivieren
+#    - automation.bad_temperaturalarm_aktivieren
+
 speisekammer:
   name: Küche
   entities:

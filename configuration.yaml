@@ -171,7 +171,7 @@ sensor:
            mdi:battery
         {% else %}
            mdi:battery-{{(states.binary_sensor.door_window_sensor_158d000153b0e1.attributes.battery_level|float / 10)|round*10}}
-        {% if states.binary_sensor.door_window_sensor_158d000153b0e1.state == "on"%} Offen {%- else -%} Geschlossen {%- endif -%}
+        {% if states.binary_sensor.door_window_sensor_158d000153b0e1.state == "open"%} Offen {%- else -%} Geschlossen {%- endif -%}
         {%- endif %}'
       battery_hygro_wohnzimmer:
         value_template: '{{ states.sensor.temperature_158d00011172f3.attributes.battery_level }} %'    
@@ -308,8 +308,8 @@ switch:
     - light.bad
     - light.speisesaal
   name: Fluxer
-  start_time: '5:30'
-  stop_time: '23:59'
+  start_time: '5:45'
+  stop_time: '5:30'
   start_colortemp: 5000
   sunset_colortemp: 3400
   stop_colortemp: 2700
@@ -322,7 +322,8 @@ media_player:
     name: Kodi
     port: 80
     enable_websocket: false
-
+  - platform: vlc
+    name: VLC
 scene:
   - name: Wohnzimmer normal
     entities:
@@ -352,10 +353,10 @@ automation:
         entity_id: sun.sun
         state: 'below_horizon'
     action:
-        service: scene.turn_on
+      - service: scene.turn_on
         entity_id: scene.wohnzimmer_normal
 #      - service: switch.turn_on
-#        entity_id: switch.flux
+#        entity_id: switch.fluxer
   - alias: "Balkon offen"
     trigger:
       - platform: state
@@ -385,10 +386,10 @@ automation:
         entity_id: sun.sun
         state: 'below_horizon'
     action:
-        service: scene.turn_on
+      - service: scene.turn_on
         entity_id: scene.wohnzimmer_dimmen
 #      - service: switch.turn_off
-#        entity_id: switch.flux
+#        entity_id: switch.fluxer
 
   - alias: "Nachtlicht bei Bewegung"
     trigger:
@@ -411,6 +412,151 @@ automation:
       service: notify.telegram
       data:
         message: 'Es gibt eine neue HASS-Version!'
+  - alias: "Fluxer Start"
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      service: switch.turn_on
+      entity_id:
+        - switch.fluxer
+
+#  - alias: "Schlafzimmer Feuchtigkeitsalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.humidity_158d00012914cb.state | int > 60 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.schlafzimmer_feucht
+#  - alias: "Schlafzimmer Temperaturalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.temperature_158d00012914cb.state | int < 17 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.schlafzimmer_kalt
+#  - alias: "Wohnzimmer Feuchtigkeitsalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.humidity_158d00011172f3.state | int > 60 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.wohnzimmer_feucht
+#  - alias: "Wohnzimmer Temperaturalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.temperature_158d00011172f3.state | int < 17 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.wohnzimmer_kalt
+#  - alias: "Bad Feuchtigkeitsalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.humidity_158d00012bf206.state | int > 69 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.bad_feucht
+#  - alias: "Bad Temperaturalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.temperature_158d00012bf206.state | int < 17 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.bad_kalt
+#  - alias: "Spielzimmer Feuchtigkeitsalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.humidity_158d0001100456.state | int > 60 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.spielzimmer_feucht
+#  - alias: "Spielzimmer Temperaturalarm aktivieren"
+#    trigger:
+#      - platform: template
+#        value_template: '{{ states.sensor.temperature_158d0001100456.state | int < 17 }}'
+#    condition:
+#      condition: and
+#      conditions:
+#        - condition: state
+#          entity_id: device_tracker.stephansiphone
+#          state: 'home'
+#        - condition: time
+#          after: '06:00:00'
+#          before: '22:00:00'
+#    action:
+#      service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.spielzimmer_kalt
 
 
 ##
@@ -446,7 +592,7 @@ device_tracker:
 alert:
   romy_feuchtigkeit:
     name: Romys Zimmer müsste mal gelüftet werden!
-    entity_id: binary_sensor.romy_zimmer_feucht
+    entity_id: binary_sensor.spielzimmer_feucht
     repeat: 30
     notifiers:
       - telegram_haushalt
@@ -470,30 +616,29 @@ alert:
       - telegram_haushalt
   romy_temperatur:
     name: Niedrige Temperatur in Romys Zimmer!
-    entity_id: binary_sensor.romy_zimmer_kalt
+    entity_id: binary_sensor.spielzimmer_kalt
     repeat: 30
-    skip_first: True
     notifiers:
       - telegram_haushalt
   wohnzimmer_temperatur:
     name: Niedrige Temperatur im Wohnzimmer!
     entity_id: binary_sensor.wohnzimmer_kalt
-    skip_first: True
     repeat: 30
+    skip_first: true
     notifiers:
       - telegram_haushalt
   bad_temperatur:
     name: Niedrige Temperatur im Bad!
     entity_id: binary_sensor.bad_kalt
-    skip_first: True
     repeat: 30
+    skip_first: true
     notifiers:
       - telegram_haushalt
   schlafzimmer_temperatur:
     name: Niedrige Temperatur im Schlafzimmer!
     entity_id: binary_sensor.schlafzimmer_kalt
     repeat: 30
-    skip_first: True
+    skip_first: true
     notifiers:
       - telegram_haushalt
 
@@ -501,7 +646,7 @@ binary_sensor:
   - platform: iss
   - platform: template
     sensors:
-      romy_zimmer_feucht:
+      spielzimmer_feucht:
         value_template: '{{ states.sensor.humidity_158d0001100456.state | int > 60 }}'
         friendly_name: 'Romys Zimmer Luftfeuchte'
   - platform: template
@@ -521,7 +666,7 @@ binary_sensor:
         friendly_name: 'Schlafzimmer Luftfeuchte'
   - platform: template
     sensors:
-      romy_zimmer_kalt:
+      spielzimmer_kalt:
         value_template: '{{ states.sensor.temperature_158d0001100456.state | int < 17 }}'
         friendly_name: 'Romys Zimmer Temperatur'
   - platform: template
@@ -540,8 +685,62 @@ binary_sensor:
         value_template: '{{ states.sensor.temperature_158d00012914cb.state | int < 17 }}'
         friendly_name: 'Schlafzimmer Temperatur'
 
+  - platform: command_line
+    command: 'ls /home/pi/.homebridge/homebridge-status | grep -i "stephan_home" | wc -l'
+    name: Stephanishome
+    payload_on: 1
+    payload_off: 0
+    scan_interval: 30
+
+#input_boolean:
+#  schlafzimmer_kalt:
+##    name: Schlafzimmer zu kalt
+##    initial: off
+#  schlafzimmer_feucht:
+#    name: Schlafzimmer zu feucht
+#    initial: off
+#  wohnzimmer_kalt:
+#    name: Wonzimmer zu kalt
+#    initial: off
+#  wohnzimmer_feucht:
+#    name: Wohnzimmer zu feucht
+#    initial: off
+#  bad_kalt:
+#    name: Bad zu kalt
+#    initial: off
+#  bad_feucht:
+#    name: Bad zu feucht
+#    initial: off
+#  spielzimmer_kalt:
+#    name: Spielzimmer zu kalt
+#    initial: off
+#  spielzimmer_feucht:
+#    name: Spielzimmer zu feucht
+#    initial: off
 ios:
+
+tts:
+  - platform: google
+    language: 'de'
 
 google:
   client_id: 44558772016-ni3uiijas046ihu81vdsecor4q7ofb9d.apps.googleusercontent.com 
   client_secret: m7vYHKNj4ZfpN5z8HckouJ-O
+
+zone:
+  name: Stephans Arbeit
+  latitude: 54.1478358
+  longitude: 11.892381
+  icon: mdi:calendar-multiple 
+
+zone 2:
+  name: Jules Arbeit
+  latitude: 54.152141
+  longitude: 11.709278
+  icon: mdi:calendar-multiple
+
+zone 3:
+  name: Tagesmutter
+  latitude: 54.1635696
+  longitude: 11.9659407
+  icon: mdi:baby-buggy
