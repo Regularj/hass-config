@@ -9,7 +9,7 @@ default_view:
     - group.luftfeuchtigkeiten
     - group.raumtemperaturen
     - group.fenstertuer
-    - group.iss
+    - group.applehomekit
 iss:
   name: International Space Station
   entities:
@@ -125,24 +125,14 @@ hintergrundtechnik:
     - group.szenen
     - group.switches
     - group.automatismen
-    - group.applehomekit
 applehomekit:
-  name: Apple Homekit
+  name: Anwesenheitskontrolle
   entities:
-    - binary_sensor.stephanishome
-#    - group.boolean
+    - device_tracker.stephansiphone
+    - binary_sensor.stephan_ist_zu_Hause
+    - device_tracker.androide3c5daf46596c063home
+    - device_tracker.androidf0f89b5be25f73echome
 
-#boolean:
-#  name: Input Boolean
-#  entities:
-#    - input_boolean.schlafzimmer_feucht
-#    - input_boolean.schlafzimmer_kalt
-#    - input_boolean.wohnzimmer_feucht
-#    - input_boolean.wohnzimmer_kalt
-#    - input_boolean.bad_feucht
-#    - input_boolean.bad_kalt
-#    - input_boolean.spielzimmer_feucht
-#    - input_boolean.spielzimmer_kalt
 szenen:
   name: Szenen
   entities:
@@ -164,14 +154,6 @@ automatismen:
     - automation.keine_alarme
     - automation.alarme_neustart
     - automation.fluxer_start
-#    - automation.schlafzimmer_feuchtigkeitsalarm_aktivieren
-#    - automation.schlafzimmer_temperaturalarm_aktivieren
-#    - automation.wohnzimmer_feuchtigkeitsalarm_aktivieren
-#    - automation.wohnzimmer_temperaturalarm_aktivieren
-#    - automation.spielzimmer_feuchtigkeitsalarm_aktivieren
-#    - automation.spielzimmer_temperaturalarm_aktivieren
-#    - automation.bad_feuchtigkeitsalarm_aktivieren
-#    - automation.bad_temperaturalarm_aktivieren
 
 speisekammer:
   name: Küche
@@ -202,7 +184,7 @@ schlafzimmer:
     - sensor.humidity_158d00012914cb
     - sensor.temperature_158d00012914cb
 wetterdetails:
-  name: Wetterdetails
+  name: Aussenwelt
   view: yes
   entities:
     - group.wetterjetzt
@@ -210,6 +192,7 @@ wetterdetails:
     - group.wind
     - group.temperaturen
     - group.niederschlag
+    - group.iss
 wetterjetzt:
   name: Wetterstatus
   entities:
@@ -242,3 +225,10 @@ niederschlag:
     - sensor.dark_sky_precip_intensity
     - sensor.dark_sky_precip_probability
     - sensor.dark_sky_cloud_coverage
+orte:
+  name: Orte
+  view: yes
+  entities:
+    - camera.stephan
+    - camera.jule
+    - camera.jules_arbeitshandy

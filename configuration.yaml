@@ -43,10 +43,10 @@ discovery:
 conversation:
 
 # Enables support for tracking state changes over time.
-history:
+#history:
 
 # View all events in a logbook
-logbook:
+#logbook:
 logger:
 #  default: warning
 
@@ -75,11 +75,6 @@ sensor:
       geburtstagskalender:
         friendly_name: 'Geburtstage'
         value_template: '{{ states.calendar.geburtstagskalender.attributes.message }} hat am {{ as_timestamp(states.calendar.geburtstagskalender.attributes.start_time) | timestamp_custom("%d.%m.",True) }} Geburtstag'
-#  - platform: template
-#    sensors:
-#      friends_geburtstage:
-#        friendly_name: 'Geburtstage'
-#        value_template: '{{ states.calendar.friends_birthdays.attributes.message }} ist am {{ as_timestamp(states.calendar.friends_birthdays.attributes.start_time) | timestamp_custom("%d.%m.",True) }}'
   - platform: template
     sensors:
       feiertage:
@@ -588,62 +583,73 @@ device_tracker:
     username: regularj@pictor.uberspace.de
     password: !secret icloud
     account_name: Stephans iPhone
-
+  - platform: nmap_tracker
+    hosts: 192.168.0.1-255
+    value_template: '{% if states.device_tracker.androide3c5daf46596c063home.state == "home"%} zu Hause {%- else -%} nicht zu Hause {%- endif -%}'
 alert:
   romy_feuchtigkeit:
     name: Romys Zimmer müsste mal gelüftet werden!
     entity_id: binary_sensor.spielzimmer_feucht
-    repeat: 30
+    repeat: 60
     notifiers:
       - telegram_haushalt
   wohnzimmer_feuchtigkeit:
     name: Das Wohnzimmer müsste mal gelüftet werden!
     entity_id: binary_sensor.wohnzimmer_feucht
-    repeat: 30
+    repeat: 60
     notifiers:
       - telegram_haushalt
   bad_feuchtigkeit:
     name: Das Bad müsste mal gelüftet werden!
     entity_id: binary_sensor.bad_feucht
-    repeat: 30
+    repeat: 60
     notifiers:
       - telegram_haushalt
   schlafzimmer_feuchtigkeit:
     name: Das Schlafzimmer müsste mal gelüftet werden!
     entity_id: binary_sensor.schlafzimmer_feucht
-    repeat: 30
+    repeat: 60
     notifiers:
       - telegram_haushalt
   romy_temperatur:
     name: Niedrige Temperatur in Romys Zimmer!
     entity_id: binary_sensor.spielzimmer_kalt
-    repeat: 30
+    repeat: 60
     notifiers:
       - telegram_haushalt
   wohnzimmer_temperatur:
     name: Niedrige Temperatur im Wohnzimmer!
     entity_id: binary_sensor.wohnzimmer_kalt
-    repeat: 30
+    repeat: 60
     skip_first: true
     notifiers:
       - telegram_haushalt
   bad_temperatur:
     name: Niedrige Temperatur im Bad!
     entity_id: binary_sensor.bad_kalt
-    repeat: 30
+    repeat: 60
     skip_first: true
     notifiers:
       - telegram_haushalt
   schlafzimmer_temperatur:
     name: Niedrige Temperatur im Schlafzimmer!
     entity_id: binary_sensor.schlafzimmer_kalt
-    repeat: 30
+    repeat: 60
     skip_first: true
     notifiers:
       - telegram_haushalt
 
 binary_sensor:
   - platform: iss
+###############################
+###iOS Presence detection######
+###############################
+  - platform: command_line
+    command: 'ls /home/pi/.homebridge/homebridge-status/stephan_home | grep -i "stephan_home" | wc -l'
+    name: Stephan ist zu Hause
+    payload_on: 1
+    payload_off: 0
+    scan_interval: 30
   - platform: template
     sensors:
       spielzimmer_feucht:
@@ -685,38 +691,6 @@ binary_sensor:
         value_template: '{{ states.sensor.temperature_158d00012914cb.state | int < 17 }}'
         friendly_name: 'Schlafzimmer Temperatur'
 
-  - platform: command_line
-    command: 'ls /home/pi/.homebridge/homebridge-status | grep -i "stephan_home" | wc -l'
-    name: Stephanishome
-    payload_on: 1
-    payload_off: 0
-    scan_interval: 30
-
-#input_boolean:
-#  schlafzimmer_kalt:
-##    name: Schlafzimmer zu kalt
-##    initial: off
-#  schlafzimmer_feucht:
-#    name: Schlafzimmer zu feucht
-#    initial: off
-#  wohnzimmer_kalt:
-#    name: Wonzimmer zu kalt
-#    initial: off
-#  wohnzimmer_feucht:
-#    name: Wohnzimmer zu feucht
-#    initial: off
-#  bad_kalt:
-#    name: Bad zu kalt
-#    initial: off
-#  bad_feucht:
-#    name: Bad zu feucht
-#    initial: off
-#  spielzimmer_kalt:
-#    name: Spielzimmer zu kalt
-#    initial: off
-#  spielzimmer_feucht:
-#    name: Spielzimmer zu feucht
-#    initial: off
 ios:
 
 tts:
@@ -744,3 +718,23 @@ zone 3:
   latitude: 54.1635696
   longitude: 11.9659407
   icon: mdi:baby-buggy
+
+panel_iframe:
+  kodi:
+    title: 'Kodi'
+    url: 'http://192.168.0.157:80'
+    icon: mdi:kodi
+
+camera:
+  - name: Stephan
+    platform: generic
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.stephansiphone.attributes.latitude }},{{ states.device_tracker.stephansiphone.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{ states.device_tracker.stephansiphone.attributes.latitude }},{{ states.device_tracker.stephansiphone.attributes.longitude }}
+    limit_refetch_to_url_change: true
+  - name: Jule
+    platform: generic
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:J%7C{{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}
+    limit_refetch_to_url_change: true
+  - name: Jules Arbeitshandy
+    platform: generic
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androidf0f89b5be25f73echome.attributes.latitude }},{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:JA%7C{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.latitude }},{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.longitude }}
+    limit_refresh_to_url_change: true

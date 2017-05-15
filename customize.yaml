@@ -34,8 +34,8 @@
     friendly_name: Stephans Apple Watch 2
   sensor.yr_symbol:
     friendly_name: Wettersymbol
-  binary_sensor.door_window_sensor_158d000153b0e1:
-    friendly_name: Balkontür
+#  binary_sensor.door_window_sensor_158d000153b0e1:
+#    friendly_name: Balkontür
     icon: mdi:glassdoor
   sensor.privat:
     icon: mdi:calendar
@@ -86,3 +86,12 @@
   licht.speisesaal_licht:
     custom_ui_state_card: custom_light
     show_last_changed: true
+  device_tracker.androide3c5daf46596c063home:
+    friendly_name: Jule
+    icon: mdi:cellphone-android
+  binary_sensor.stephan_ist_zu_hause:
+    friendly_name: Stephan
+    icon: mdi:cellphone-iphone
+  device_tracker.androidf0f89b5be25f73echome:
+    friendly_name: Jules Arbeitshandy
+    icon: mdi:cellphone-android
