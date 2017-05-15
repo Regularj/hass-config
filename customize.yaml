@@ -34,8 +34,8 @@
     friendly_name: Stephans Apple Watch 2
   sensor.yr_symbol:
     friendly_name: Wettersymbol
-#  binary_sensor.door_window_sensor_158d000153b0e1:
-#    friendly_name: Balkontür
+  binary_sensor.door_window_sensor_158d000153b0e1:
+    friendly_name: Balkontür
     icon: mdi:glassdoor
   sensor.privat:
     icon: mdi:calendar
