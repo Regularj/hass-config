@@ -640,16 +640,13 @@ alert:
       - telegram_haushalt
 
 binary_sensor:
-  - platform: iss
-###############################
-###iOS Presence detection######
-###############################
   - platform: command_line
-    command: 'ls /home/pi/.homebridge/homebridge-status/stephan_home | grep -i "stephan_home" | wc -l'
+    command: 'ls /home/pi/.homebridge/homebridge-status | grep -i "stephan_home" | wc -l'
     name: Stephan ist zu Hause
     payload_on: 1
     payload_off: 0
     scan_interval: 30
+  - platform: iss
   - platform: template
     sensors:
       spielzimmer_feucht:
