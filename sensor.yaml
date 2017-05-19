@@ -1,212 +1,205 @@
-  - platform: template
-    sensors:
-      privat:
-        friendly_name: 'Privat'
-        value_template: '{{ states.calendar.stephaneckermanngooglemailcom.attributes.message}} am {{ as_timestamp(states.calendar.stephaneckermanngooglemailcom.attribu$
-#  - platform: template
-#    sensors:
-#      contacts:
-#        friendly_name: 'Kontakte'
-#        value_template: '{{ states.calendar.contacts.attributes.message }}'
-  - platform: template
-    sensors:
-      geburtstagskalender:
-        friendly_name: 'Geburtstage'
-        value_template: '{{ states.calendar.geburtstagskalender.attributes.message }} hat am {{ as_timestamp(states.calendar.geburtstagskalender.attributes.start_time)$
-#    - platform: template
-#      sensors:
-#        friends_geburtstage:
-#          friendly_name: 'Geburtstage'
-#          value_template: '{{ states.calendar.friends_birthdays.attributes.message }} ist am {{ as_timestamp(states.calendar.friends_birthdays.attributes.start_time) | $
-  - platform: template
-    sensors:
-      feiertage:
-        friendly_name: 'Feiertage'
-        value_template: '{{ as_timestamp(states.calendar.feiertage_in_deutschland.attributes.start_time) | timestamp_custom("Am %d.%m.",True) }} ist {{ states.calendar$
-  - platform: systemmonitor
-    resources:
-      - type: since_last_boot
-  - platform: template
-    sensors:
-      since_last_boot_templated:
-        value_template: >-
-          {%- set slb = states.sensor.since_last_boot.state.split(' ') -%}
-          {%- set count = slb | length -%}
-          {%- set hms = slb[count - 1] -%}
-          {%- set hms_trimmed = hms.split('.')[0] -%}
-          {%- set hms_split = hms_trimmed.split(':') -%}
-          {%- set hours = hms_split[0] | int -%}
-          {%- set minutes = hms_split[1] | int -%}
-          {%- set seconds = hms_split[2] | int -%}
- 
-          {%- if count == 3 -%}
-            {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
+- platform: template
+  sensors:
+    privat:
+      friendly_name: 'Privat'
+      value_template: '{{ states.calendar.stephaneckermanngooglemailcom.attributes.message}} am {{ as_timestamp(states.calendar.stephaneckermanngooglemailcom.attributes.start_time) | timestamp_custom("%d.%m.%Y, um %H:%M",True) }} Uhr.'
+- platform: template
+  sensors:
+    contacts:
+      friendly_name: 'Kontakte'
+      value_template: '{{ states.calendar.contacts.attributes.message }}'
+- platform: template
+  sensors:
+    geburtstagskalender:
+      friendly_name: 'Geburtstage'
+      value_template: '{{ states.calendar.geburtstagskalender.attributes.message }} hat am {{ as_timestamp(states.calendar.geburtstagskalender.attributes.start_time) | timestamp_custom("%d.%m.",True) }} Geburtstag'
+- platform: template
+  sensors:
+    feiertage:
+      friendly_name: 'Feiertage'
+      value_template: '{{ as_timestamp(states.calendar.feiertage_in_deutschland.attributes.start_time) | timestamp_custom("Am %d.%m.",True) }} ist {{ states.calendar.feiertage_in_deutschland.attributes.message }}'
+- platform: systemmonitor
+  resources:
+    - type: since_last_boot
+- platform: template
+  sensors:
+    since_last_boot_templated:
+      value_template: >-
+        {%- set slb = states.sensor.since_last_boot.state.split(' ') -%}
+        {%- set count = slb | length -%}
+        {%- set hms = slb[count - 1] -%}
+        {%- set hms_trimmed = hms.split('.')[0] -%}
+        {%- set hms_split = hms_trimmed.split(':') -%}
+        {%- set hours = hms_split[0] | int -%}
+        {%- set minutes = hms_split[1] | int -%}
+        {%- set seconds = hms_split[2] | int -%}
+         {%- if count == 3 -%}
+          {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if hours == 1 -%}
+            1 Stunde
+          {%- else -%}
+            {{ hours }} Stunden
           {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
           {%- if hours > 0 -%}
-            {%- if hours == 1 -%}
-              1 Stunde
-            {%- else -%}
-              {{ hours }} Stunden
-            {%- endif -%}
+            {{ ', ' }}
           {%- endif -%}
-          {%- if minutes > 0 -%}
-            {%- if hours > 0 -%}
-              {{ ', ' }}
-            {%- endif -%}
-            {%- if minutes == 1 -%}
-             1 Minuten
-            {%- else -%}
-              {{ minutes }} Minuten
-            {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 Minuten
+          {%- else -%}
+            {{ minutes }} Minuten
           {%- endif -%}
-          {%- if seconds > 0 -%}
-            {%- if hours > 0 or minutes > 0 -%}
-              {{ ', ' }}
-            {%- endif -%}
-            {%- if seconds == 1 -%}
-              1 Sekunde
-            {%- else -%}
-              {{ seconds }} Sekunden
-            {%- endif -%}
+        {%- endif -%}
+        {%- if seconds > 0 -%}
+          {%- if hours > 0 or minutes > 0 -%}
+            {{ ', ' }}
           {%- endif -%}
-  - platform: nzbget
-    host: 192.168.0.157
-    port: 5678
-    username: nzbget
-    password: !secret nzbget
-    monitored_variables:
-      - remaining_size
-      - download_rate
-      - download_paused
-  - platform: template
-    sensors:
-      battery_stephansiphone:
-        unit_of_measurement: '%'
-        value_template: >-
-            {%- if states.device_tracker.stephansiphone.attributes.battery %}
-                {{ states.device_tracker.stephansiphone.attributes.battery|round }}
-            {% else %}
-                {{ states.sensor.battery_stephansiphone.state }}
-            {%- endif %}
-        icon_template: '{%- if is_state("sensor.battery_stephansiphone", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.stephansiphone", "batte$
-      battery_applewatch:
-        unit_of_measurement: '%'
-        value_template: >-
-            {%- if states.device_tracker.apple_watchvonstephan.attributes.battery %}
-                {{ states.device_tracker.apple_watchvonstephan.attributes.battery|round }}
-            {% else %}
-                {{ states.sensor.battery_apple_watchvonstephan.state }}
-            {%- endif %}
-        icon_template: '{%- if is_state("sensor.battery_apple_watchvonstephan", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.apple_watchvonst$
-      battery_balkon:
-        value_template: '{{ states.binary_sensor.door_window_sensor_158d000153b0e1.attributes.battery_level }} %'
-        friendly_name: Balkontür
-        icon_template: '
-        {%- if is_state("binary_sensor.door_window_sensor_158d000153b0e1", "unknown") %}
-           mdi:battery-unknown
-        {%- elif  states.binary_sensor.door_window_sensor_158d000153b0e1.battery_level <= 5 %}
-           mdi:battery-outline
-        {%- elif states.binary_sensor.door_window_sensor_158d000153b0e1.battery_level >= 95 %}
-           mdi:battery
-        {% else %}
-           mdi:battery-{{(states.binary_sensor.door_window_sensor_158d000153b0e1.battery_level|float / 10)|round*10}}
-        {% if states.binary_sensor.door_window_sensor_158d000153b0e1.state == "on"%} Offen {%- else -%} Geschlossen {%- endif -%}
-        {%- endif %}'
-      battery_hygro_wohnzimmer:
-        value_template: '{{ states.sensor.temperature_158d00011172f3.attributes.battery_level }} %'
-        friendly_name: Hygrometer Wohnzimmer
-        icon_template: '
-        {%- if is_state("sensor.temperature_158d00011172f3", "unknown") %}
-           mdi:battery-unknown
-        {%- elif  states.sensor.temperature_158d00011172f3.attributes.battery_level <= 5 %}
-           mdi:battery-outline
-        {%- elif states.sensor.temperature_158d00011172f3.attributes.battery_level >= 95 %}
-           mdi:battery
-        {% else %}
-           mdi:battery-{{(states.sensor.temperature_158d00011172f3.attributes.battery_level|float / 10)|round*10}}
-        {%- endif %}'
-      battery_hygro_romy:
-        value_template: '{{ states.sensor.temperature_158d0001100456.attributes.battery_level }} %'
-        friendly_name: Hygrometer Romys Zimmer
-        icon_template: '
-        {%- if is_state("sensor.temperature_158d0001100456", "unknown") %}
-           mdi:battery-unknown
-        {%- elif  states.sensor.temperature_158d0001100456.attributes.battery_level <= 5 %}
-           mdi:battery-outline
-        {%- elif states.sensor.temperature_158d0001100456.attributes.battery_level >= 95 %}
-           mdi:battery
-        {% else %}
-           mdi:battery-{{(states.sensor.temperature_158d0001100456.attributes.battery_level|float / 10)|round*10}}
-        {%- endif %}'
-      battery_hygro_bad:
-        value_template: '{{ states.sensor.temperature_158d00012bf206.attributes.battery_level }} %'
-        friendly_name: Hygrometer Badezimmer
-        icon_template: '
-        {%- if is_state("sensor.temperature_158d00012bf206", "unknown") %}
-           mdi:battery-unknown
-        {%- elif  states.sensor.temperature_158d00012bf206.attributes.battery_level <= 5 %}
-           mdi:battery-outline
-        {%- elif states.sensor.temperature_158d00012bf206.attributes.battery_level >= 95 %}
-           mdi:battery
-        {% else %}
-           mdi:battery-{{(states.sensor.temperature_158d00012bf206.attributes.battery_level|float / 10)|round*10}}
-        {%- endif %}'
-      battery_hygro_schlafzimmer:
-        value_template: '{{ states.sensor.temperature_158d00012914cb.attributes.battery_level }} %'
-        friendly_name: Hygrometer Schlafzimmer
-        icon_template: '
-        {%- if is_state("sensor.temperature_158d00012914cb", "unknown") %}
-           mdi:battery-unknown
-        {%- elif  states.sensor.temperature_158d00012914cb.attributes.battery_level <= 5 %}
-           mdi:battery-outline
-        {%- elif states.sensor.temperature_158d00012914cb.attributes.battery_level >= 95 %}
-           mdi:battery
-        {% else %}
-           mdi:battery-{{(states.sensor.temperature_158d00012914cb.attributes.battery_level|float / 10)|round*10}}
-        {%- endif %}'
-      battery_bewegungsmelder:
-        value_template: '{{ states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level }} %'
-        friendly_name: Bewegungsmelder Flur
-        icon_template: '
-        {%- if is_state("binary_sensor.motion_sensor_158d00010f859c", "unknown") %}
-           mdi:battery-unknown
-        {%- elif  states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level <= 5 %}
-           mdi:battery-outline
-        {%- elif states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level >= 95 %}
-           mdi:battery
-        {% else %}
-           mdi:battery-{{(states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level|float / 10)|round*10}}
-        {%- endif %}'
-  - platform: sonarr
-    api_key: a3b159ca37664be78233a86afaf9602d
-    host: 192.168.0.157
-    port: 8989
-    monitored_conditions:
-      - upcoming
-      - wanted
-      - queue
-      - diskspace
-    days: 7
-  - platform: darksky
-    language: de
-    api_key: 61beaf4f6ab875c7912c9ccfb6054fc4
-    update_interval: '00:05'
-    monitored_conditions:
-      - summary
-      - precip_type
-      - precip_intensity
-      - precip_probability
-      - temperature
-      - apparent_temperature
-      - dew_point
-      - wind_speed
-      - wind_bearing
-      - cloud_cover
-      - humidity
-      - pressure
-      - visibility
-      - hourly_summary
-      - daily_summary
-      - temperature_max
-      - temperature_min
-
+          {%- if seconds == 1 -%}
+            1 Sekunde
+          {%- else -%}
+            {{ seconds }} Sekunden
+          {%- endif -%}
+        {%- endif -%}
+- platform: nzbget
+  host: 192.168.0.157
+  port: 5678
+  username: nzbget
+  password: !secret nzbget
+  monitored_variables:
+    - remaining_size
+    - download_rate
+    - download_paused
+- platform: template
+  sensors:
+    battery_stephansiphone:
+      unit_of_measurement: '%'
+      value_template: >-
+          {%- if states.device_tracker.stephansiphone.attributes.battery %}
+              {{ states.device_tracker.stephansiphone.attributes.battery|round }}
+          {% else %}
+              {{ states.sensor.battery_stephansiphone.state }}
+          {%- endif %}
+      icon_template: '{%- if is_state("sensor.battery_stephansiphone", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.stephansiphone", "battery_status", "Charging") %}mdi:battery-charging{%- elif  states.device_tracker.stephansiphone.attributes.battery <= 5 %}mdi:battery-outline{%- elif states.device_tracker.stephansiphone.attributes.battery >= 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.stephansiphone.attributes.battery|float / 10)|round*10}}{%- endif %}'
+    battery_applewatch:
+      unit_of_measurement: '%'
+      value_template: >-
+          {%- if states.device_tracker.apple_watchvonstephan.attributes.battery %}
+              {{ states.device_tracker.apple_watchvonstephan.attributes.battery|round }}
+          {% else %}
+              {{ states.sensor.battery_apple_watchvonstephan.state }}
+          {%- endif %}
+      icon_template: '{%- if is_state("sensor.battery_apple_watchvonstephan", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.apple_watchvonstephan", "battery_status", "Charging") %}mdi:battery-charging{%- elif  states.device_tracker.apple_watchvonstephan.attributes.battery <= 5 %}mdi:battery-outline{%- elif states.device_tracker.apple_watchvonstephan.attributes.battery >= 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.apple_watchvonstephan.attributes.battery|float / 10)|round*10}}{%- endif %}'
+    battery_balkon:
+      value_template: '{{ states.binary_sensor.door_window_sensor_158d000153b0e1.attributes.battery_level }} %'
+      friendly_name: Balkontür
+      icon_template: '
+      {%- if is_state("binary_sensor.door_window_sensor_158d000153b0e1", "unknown") %}
+         mdi:battery-unknown
+      {%- elif  states.binary_sensor.door_window_sensor_158d000153b0e1.attributes.battery_level <= 5 %}
+         mdi:battery-outline
+      {%- elif states.binary_sensor.door_window_sensor_158d000153b0e1.attributes.battery_level >= 95 %}
+         mdi:battery
+      {% else %}
+         mdi:battery-{{(states.binary_sensor.door_window_sensor_158d000153b0e1.attributes.battery_level|float / 10)|round*10}}
+      {% if states.binary_sensor.door_window_sensor_158d000153b0e1.state == "open"%} Offen {%- else -%} Geschlossen {%- endif -%}
+      {%- endif %}'
+    battery_hygro_wohnzimmer:
+      value_template: '{{ states.sensor.temperature_158d00011172f3.attributes.battery_level }} %'    
+      friendly_name: Hygrometer Wohnzimmer
+      icon_template: '
+      {%- if is_state("sensor.temperature_158d00011172f3", "unknown") %}
+         mdi:battery-unknown
+      {%- elif  states.sensor.temperature_158d00011172f3.attributes.battery_level <= 5 %}
+         mdi:battery-outline
+      {%- elif states.sensor.temperature_158d00011172f3.attributes.battery_level >= 95 %}
+         mdi:battery
+      {% else %}
+         mdi:battery-{{(states.sensor.temperature_158d00011172f3.attributes.battery_level|float / 10)|round*10}}
+      {%- endif %}'
+    battery_hygro_romy:
+      value_template: '{{ states.sensor.temperature_158d0001100456.attributes.battery_level }} %'
+      friendly_name: Hygrometer Romys Zimmer
+      icon_template: '
+      {%- if is_state("sensor.temperature_158d0001100456", "unknown") %}
+         mdi:battery-unknown
+      {%- elif  states.sensor.temperature_158d0001100456.attributes.battery_level <= 5 %}
+         mdi:battery-outline
+      {%- elif states.sensor.temperature_158d0001100456.attributes.battery_level >= 95 %}
+         mdi:battery
+      {% else %}
+         mdi:battery-{{(states.sensor.temperature_158d0001100456.attributes.battery_level|float / 10)|round*10}}
+      {%- endif %}'
+    battery_hygro_bad:
+      value_template: '{{ states.sensor.temperature_158d00012bf206.attributes.battery_level }} %'
+      friendly_name: Hygrometer Badezimmer
+      icon_template: '
+      {%- if is_state("sensor.temperature_158d00012bf206", "unknown") %}
+         mdi:battery-unknown
+      {%- elif  states.sensor.temperature_158d00012bf206.attributes.battery_level <= 5 %}
+         mdi:battery-outline
+      {%- elif states.sensor.temperature_158d00012bf206.attributes.battery_level >= 95 %}
+         mdi:battery
+      {% else %}
+         mdi:battery-{{(states.sensor.temperature_158d00012bf206.attributes.battery_level|float / 10)|round*10}}
+      {%- endif %}'
+    battery_hygro_schlafzimmer:
+      value_template: '{{ states.sensor.temperature_158d00012914cb.attributes.battery_level }} %'
+      friendly_name: Hygrometer Schlafzimmer
+      icon_template: '
+      {%- if is_state("sensor.temperature_158d00012914cb", "unknown") %}
+         mdi:battery-unknown
+      {%- elif  states.sensor.temperature_158d00012914cb.attributes.battery_level <= 5 %}
+         mdi:battery-outline
+      {%- elif states.sensor.temperature_158d00012914cb.attributes.battery_level >= 95 %}
+         mdi:battery
+      {% else %}
+         mdi:battery-{{(states.sensor.temperature_158d00012914cb.attributes.battery_level|float / 10)|round*10}}
+      {%- endif %}'
+    battery_bewegungsmelder:
+      value_template: '{{ states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level }} %'
+      friendly_name: Bewegungsmelder Flur
+      icon_template: '
+      {%- if is_state("binary_sensor.motion_sensor_158d00010f859c", "unknown") %}
+         mdi:battery-unknown
+      {%- elif  states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level <= 5 %}
+         mdi:battery-outline
+      {%- elif states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level >= 95 %}
+         mdi:battery
+      {% else %}
+         mdi:battery-{{(states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level|float / 10)|round*10}}
+      {%- endif %}'
+- platform: sonarr
+  api_key: a3b159ca37664be78233a86afaf9602d
+  host: 192.168.0.157
+  port: 8989
+  monitored_conditions:
+    - upcoming
+    - wanted
+    - queue
+    - diskspace
+  days: 7
+- platform: darksky
+  language: de
+  api_key: 61beaf4f6ab875c7912c9ccfb6054fc4
+  update_interval: '00:05'
+  monitored_conditions:
+     - summary
+     - precip_type
+     - precip_intensity
+     - precip_probability
+     - temperature
+     - apparent_temperature
+     - dew_point
+     - wind_speed
+     - wind_bearing
+     - cloud_cover
+     - humidity
+     - pressure
+     - visibility
+     - hourly_summary
+     - daily_summary
+     - temperature_max
+     - temperature_min

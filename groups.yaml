@@ -132,6 +132,7 @@ applehomekit:
     - binary_sensor.stephan_ist_zu_Hause
     - device_tracker.androide3c5daf46596c063home
     - device_tracker.androidf0f89b5be25f73echome
+    - device_tracker.owntracks
 
 szenen:
   name: Szenen
@@ -232,3 +233,4 @@ orte:
     - camera.stephan
     - camera.jule
     - camera.jules_arbeitshandy
+    - camera.owntracks
