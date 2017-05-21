@@ -2,6 +2,7 @@ default_view:
   view: yes
   entities:
     - group.alerts
+    - group.schimmel
     - group.wetter
     - group.lichter
     - group.kalender
@@ -10,10 +11,17 @@ default_view:
     - group.raumtemperaturen
     - group.fenstertuer
     - group.applehomekit
-iss:
-  name: International Space Station
+
+schimmel:
+  name: Schimmelgefahr
+  entities:
+    - sensor.mold_indicator
+
+weltall:
+  name: Weltall
   entities:
     - binary_sensor.iss
+    - sensor.moon
 
 zimmerdetails:
   name: Übersicht Zimmer
@@ -193,7 +201,7 @@ wetterdetails:
     - group.wind
     - group.temperaturen
     - group.niederschlag
-    - group.iss
+    - group.weltall
 wetterjetzt:
   name: Wetterstatus
   entities:

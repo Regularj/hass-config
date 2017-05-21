@@ -27,7 +27,7 @@ config:
 
 http:
   # Uncomment this to add a password (recommended!)
-  # api_password: PASSWORD
+  # api_password: !secret http
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
 
@@ -40,15 +40,15 @@ discovery:
     - philips_hue
 
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+# conversation:
 
 # Enables support for tracking state changes over time.
 #history:
 
 # View all events in a logbook
-logbook:
+#logbook:
 logger:
-  default: warning
+#  default: warning
 
 # Alte Events, States löschen
 recorder:
@@ -113,6 +113,7 @@ media_player:
     port: 80
     enable_websocket: false
   - platform: vlc
+    arguments: '--rc-host=192.168.0.157:8080' 
     name: VLC
 scene:
   - name: Wohnzimmer normal
@@ -131,223 +132,12 @@ scene:
             brightness: 25
             xy_color: [ 0.5926, 0.3814 ]
 
-automation:
-  - alias: "Media player paused/stopped"
-    trigger:
-      - platform: state
-        entity_id: media_player.kodi
-        from: 'playing'
-        to: 'idle'
-    condition:
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-    action:
-      - service: scene.turn_on
-        entity_id: scene.wohnzimmer_normal
-#      - service: switch.turn_on
-#        entity_id: switch.fluxer
-  - alias: "Balkon offen"
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.door_window_sensor_158d000153b0e1
-        from: 'off'
-        to: 'on'
-    action:
-      - service: light.turn_off
-        entity_id: light.wohnzimmer_licht
-  - alias: "Balkon geschlossen"
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.door_window_sensor_158d000153b0e1
-        from: 'on'
-        to: 'off'
-    action:
-      - service: light.turn_on
-        entity_id: light.wohnzimmer_licht
-  - alias: "Media player playing"
-    trigger:
-      - platform: state
-        entity_id: media_player.kodi
-        to: 'playing'
-        from: 'idle'
-    condition:
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-    action:
-      - service: scene.turn_on
-        entity_id: scene.wohnzimmer_dimmen
-#      - service: switch.turn_off
-#        entity_id: switch.fluxer
 
-  - alias: "Nachtlicht bei Bewegung"
-    trigger:
-      platform: state
-      entity_id: binary_sensor.motion_sensor_158d00010f859c
-      from: 'no_motion'
-      to: 'motion'
-    action:
-    - service: light.turn_on
-      entity_id: light.gateway_light_f0b429cc315f
-      data:
-        rgb_color: [255,197,121]
-        brightness: 155
+##
+## Automatismen
+##
 
-  - alias: "Update Benachrichtigungen"
-    trigger:
-        platform: state
-        entity_id: updater.updater
-    action:
-      service: notify.telegram
-      data:
-        message: 'Es gibt eine neue HASS-Version!'
-  - alias: "Fluxer Start"
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      service: switch.turn_on
-      entity_id:
-        - switch.fluxer
-
-#  - alias: "Schlafzimmer Feuchtigkeitsalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.humidity_158d00012914cb.state | int > 60 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.schlafzimmer_feucht
-#  - alias: "Schlafzimmer Temperaturalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.temperature_158d00012914cb.state | int < 17 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.schlafzimmer_kalt
-#  - alias: "Wohnzimmer Feuchtigkeitsalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.humidity_158d00011172f3.state | int > 60 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.wohnzimmer_feucht
-#  - alias: "Wohnzimmer Temperaturalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.temperature_158d00011172f3.state | int < 17 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.wohnzimmer_kalt
-#  - alias: "Bad Feuchtigkeitsalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.humidity_158d00012bf206.state | int > 69 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.bad_feucht
-#  - alias: "Bad Temperaturalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.temperature_158d00012bf206.state | int < 17 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.bad_kalt
-#  - alias: "Spielzimmer Feuchtigkeitsalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.humidity_158d0001100456.state | int > 60 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.spielzimmer_feucht
-#  - alias: "Spielzimmer Temperaturalarm aktivieren"
-#    trigger:
-#      - platform: template
-#        value_template: '{{ states.sensor.temperature_158d0001100456.state | int < 17 }}'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: device_tracker.stephansiphone
-#          state: 'home'
-#        - condition: time
-#          after: '06:00:00'
-#          before: '22:00:00'
-#    action:
-#      service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.spielzimmer_kalt
-
+automation: !include automations.yaml
 
 ##
 ## TelegramBot
@@ -380,7 +170,13 @@ device_tracker:
     account_name: Stephans iPhone
   - platform: nmap_tracker
     hosts: 192.168.0.1-255
-    value_template: '{% if states.device_tracker.androide3c5daf46596c063home.state == "home"%} zu Hause {%- else -%} nicht zu Hause {%- endif -%}'
+    consider_home: 360
+    home_interval: 1
+    track_new_devices: no
+    exclude:
+      - 192.168.0.1
+      - 192.168.0.157
+      - 192.168.0.120
   - platform: owntracks
 
 mqtt:
@@ -528,15 +324,15 @@ camera:
     platform: generic
     still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.stephansiphone.attributes.latitude }},{{ states.device_tracker.stephansiphone.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{ states.device_tracker.stephansiphone.attributes.latitude }},{{ states.device_tracker.stephansiphone.attributes.longitude }}
     limit_refetch_to_url_change: true
-  - name: Jule
-    platform: generic
-    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:J%7C{{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}
-    limit_refetch_to_url_change: true
-  - name: Jules Arbeitshandy
-    platform: generic
-    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androidf0f89b5be25f73echome.attributes.latitude }},{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:JA%7C{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.latitude }},{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.longitude }}
-    limit_refresh_to_url_change: true
-  - name: OwnTracks
-    platform: generic
-    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.owntracks_paulus.attributes.latitude }},{{ states.device_tracker.owntracks.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:O%7C{{ states.device_tracker.owntracks.attributes.latitude }},{{ states.device_tracker.owntracks.attributes.longitude }}
-    limit_refetch_to_url_change: true
+#  - name: Jule
+#    platform: generic
+#    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:J%7C{{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}
+#    limit_refetch_to_url_change: true
+#  - name: Jules Arbeitshandy
+#    platform: generic
+#    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androidf0f89b5be25f73echome.attributes.latitude }},{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:JA%7C{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.latitude }},{{ states.device_tracker.androidf0f89b5be25f73echome.attributes.longitude }}
+#    limit_refresh_to_url_change: true
+#  - name: OwnTracks
+#    platform: generic
+#    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.owntracks_paulus.attributes.latitude }},{{ states.device_tracker.owntracks.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:O%7C{{ states.device_tracker.owntracks.attributes.latitude }},{{ states.device_tracker.owntracks.attributes.longitude }}
+#    limit_refetch_to_url_change: true

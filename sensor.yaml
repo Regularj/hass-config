@@ -1,3 +1,29 @@
+#- platform: mold_indicator
+#  sensors:
+#    Wohnzimmerschimmel:
+#      indoor_temp_sensor: sensor.temperature_158d0001100456
+#      indoor_humidity_sensor: sensor.humidity_158d0001100456
+#      outdoor_temp_sensor: sensor.dark_sky_temperature
+#      calibration_factor: 1.3
+#- platform: mold_indicator
+#  friendly_name: 'Schimmelgefahr im Spielzimmer'
+#  indoor_temp_sensor: sensor.temperature_158d00011172f3
+#  indoor_humidity_sensor: sensor.humidity_158d00011172f3
+#  outdoor_temp_sensor: sensor.dark_sky_temperature
+#  calibration_factor: 1.3
+#- platform: mold_indicator
+#  friendly_name: 'Schimmelgefahr im Bad'
+#  indoor_temp_sensor: sensor.temperature_158d00012bf206
+#  indoor_humidity_sensor: sensor.humidity_158d00012bf206
+#  outdoor_temp_sensor: sensor.dark_sky_temperature
+#  calibration_factor: 1.3
+#- platform: mold_indicator
+#  friendly_name: 'Schimmelgefahr im Schlafzimmer'
+#  indoor_temp_sensor: sensor.temperature_158d00012914cb
+#  indoor_humidity_sensor: sensor.humidity_158d00012914cb
+#  outdoor_temp_sensor: sensor.dark_sky_temperature
+#  calibration_factor: 1.3
+- platform: moon
 - platform: template
   sensors:
     privat:

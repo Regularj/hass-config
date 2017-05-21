@@ -1,0 +1,83 @@
+- id: mediaplayerpaused
+  alias: "Media player paused/stopped"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      from: 'playing'
+      to: 'idle'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.wohnzimmer_normal
+- id: balkonoffen
+  alias: "Balkon offen"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
+      from: 'off'
+      to: 'on'
+  action:
+    - service: light.turn_off
+      entity_id: light.wohnzimmer_licht
+- id: balkonzu
+  alias: "Balkon geschlossen"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
+      from: 'on'
+      to: 'off'
+  condition:
+    - condition: state
+      entity_id: light.wohnzimmer
+      state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: light.wohnzimmer_licht
+- id: mediaplayerplaying
+  alias: "Media player playing"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'playing'
+      from: 'idle'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.wohnzimmer_dimmen
+- id: nachtlicht
+  alias: "Nachtlicht bei Bewegung"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00010f859c
+    from: 'no_motion'
+    to: 'motion'
+  action:
+  - service: light.turn_on
+    entity_id: light.gateway_light_f0b429cc315f
+    data:
+      rgb_color: [255,197,121]
+      brightness: 155
+- id: update
+  alias: "Update Benachrichtigungen"
+  trigger:
+      platform: state
+      entity_id: updater.updater
+  action:
+    service: notify.telegram
+    data:
+      message: 'Es gibt eine neue HASS-Version!'
+- id: fluxerstart
+  alias: "Fluxer Start"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    service: switch.turn_on
+    entity_id:
+      - switch.fluxer
