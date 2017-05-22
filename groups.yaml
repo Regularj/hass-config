@@ -2,7 +2,6 @@ default_view:
   view: yes
   entities:
     - group.alerts
-    - group.schimmel
     - group.wetter
     - group.lichter
     - group.kalender
@@ -11,11 +10,6 @@ default_view:
     - group.raumtemperaturen
     - group.fenstertuer
     - group.applehomekit
-
-schimmel:
-  name: Schimmelgefahr
-  entities:
-    - sensor.mold_indicator
 
 weltall:
   name: Weltall
@@ -130,9 +124,8 @@ hintergrundtechnik:
     - group.media
     - group.akku
     - group.hasspi
-    - group.szenen
     - group.switches
-    - group.automatismen
+
 applehomekit:
   name: Anwesenheitskontrolle
   entities:
@@ -151,21 +144,6 @@ switches:
   name: Switches
   entities:
     - switch.fluxer
-automatismen:
-  name: Automatismen
-  entities:
-    - automation.balkon_offen
-    - automation.balkon_geschlossen
-    - automation.nachtlicht_bei_bewegung
-    - automation.media_player_playing
-    - automation.media_player_pausedstopped
-    - automation.update_benachrichtigungen
-    - automation.keine_alarme
-    - automation.alarme_neustart
-    - automation.fluxer_start
-    - automation.lichter_bei_abwesenheit_aus
-    - automation.lichter_vergessen
-
 speisekammer:
   name: Küche
   entities:
@@ -244,3 +222,29 @@ orte:
     - camera.jule
     - camera.jules_arbeitshandy
     - camera.owntracks
+automatismenszenen:
+  name: Automatismen & Szenen
+  view: yes
+  entities:
+    - group.szenen
+    - group.automatismenlicht
+    - group.automatismensystem
+
+automatismenlicht:
+  name: Lichtautomatismen
+  entities:
+    - automation.media_player_playing
+    - automation.media_player_pausedstopped
+    - automation.balkon_offen
+    - automation.balkon_geschlossen
+    - automation.nachtlicht_bei_bewegung
+    - automation.fluxer_start
+    - automation.lichter_bei_abwesenheit_aus
+    - automation.lichter_vergessen
+
+automatismensystem:
+  name: Systemautomatismen
+  entities:
+    - automation.update_benachrichtigungen
+    - automation.keine_alarme
+    - automation.alarme_neustart
