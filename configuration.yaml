@@ -48,7 +48,7 @@ discovery:
 # View all events in a logbook
 #logbook:
 logger:
-#  default: warning
+  default: warning
 
 # Alte Events, States löschen
 recorder:
@@ -146,13 +146,16 @@ automation: !include automations.yaml
 notify:
   - name: Telegram
     platform: telegram
-    api_key: 372241811:AAEjswt9XPBRX0MA86Fgw5-ICBWRn8tuqmE
     chat_id: 19976847
-  - name: Telegram_Haushalt
-    platform: telegram
-    api_key: 372241811:AAEjswt9XPBRX0MA86Fgw5-ICBWRn8tuqmE
-    chat_id: -204074268  
+#  - name: Telegram_Haushalt
+#    platform: telegram
+#    chat_id: -204074268
 
+telegram_bot:
+  platform: polling
+  api_key: 372241811:AAEjswt9XPBRX0MA86Fgw5-ICBWRn8tuqmE
+  allowed_chat_ids:
+    - 19976847
 
 ##
 ## Xiaomi Gateway

@@ -1,3 +1,53 @@
+############################################################################
+#                                                                          #
+#                  Automation für vergessene Lichter                       #
+#                                                                          #
+############################################################################
+
+- id: allewegaberlichteran
+  alias: "Lichter vergessen"
+  trigger:
+    platform: state
+    entity_id: device_tracker.stephansiphone, device_tracker.androide3c5daf46596c063home
+    state: 'not_home'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: light.wohnzimmer_licht
+        state: 'on'
+      - condition: state
+        entity_id: light.speisesaal_licht
+        state: 'on'
+      - condition: state
+        entity_id: light.bad_licht
+        state: 'on'
+      - condition: state
+        entity_id: light.romy_licht
+        state: 'on'
+  action:
+    - service: notify.telegram
+      data:
+        message: 'Ohje, Lichter sind noch an!'
+        data:
+          keyboard: '/ausmachen'
+- id: lichterbeiabwesenheitaus
+  alias: "Lichter bei Abwesenheit aus"
+  trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/ausmachen'
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.wohnzimmer_licht
+        - light.speisesaal_licht
+        - light.bad_licht
+        - light.romy_licht
+
+############################################################################
+
 - id: mediaplayerpaused
   alias: "Media player paused/stopped"
   trigger:

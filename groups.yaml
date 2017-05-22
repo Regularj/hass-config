@@ -163,6 +163,8 @@ automatismen:
     - automation.keine_alarme
     - automation.alarme_neustart
     - automation.fluxer_start
+    - automation.lichter_bei_abwesenheit_aus
+    - automation.lichter_vergessen
 
 speisekammer:
   name: Küche
