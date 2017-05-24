@@ -10,7 +10,7 @@ home-assistant.log
 *.db-journal
 lib
 deps
-*.conf
+ios.conf
 tts
 secrets.yaml
 known_devices.yaml
