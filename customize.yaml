@@ -95,3 +95,6 @@
   device_tracker.androidf0f89b5be25f73echome:
     friendly_name: Jules Arbeitshandy
     icon: mdi:cellphone-android
+  device_tracker.stephansiphone:
+    friendly_name: Stephan
+    icon: mdi:cellphone-iphone

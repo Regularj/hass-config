@@ -9,7 +9,7 @@ default_view:
     - group.luftfeuchtigkeiten
     - group.raumtemperaturen
     - group.fenstertuer
-    - group.applehomekit
+    - group.familie
 
 weltall:
   name: Weltall
@@ -44,6 +44,7 @@ raumtemperaturen:
     - sensor.temperature_158d00011172f3
     - sensor.temperature_158d00012bf206
     - sensor.temperature_158d00012914cb
+
 luftfeuchtigkeiten:
   name: Luftfeuchtigkeiten
   entities:
@@ -58,26 +59,31 @@ lichter:
     - light.wohnzimmer_licht
     - light.bad_licht
     - light.speisesaal_licht
+
 kalender:
   name: Kalender
   entities:
-#    - calendar.stephaneckermanngooglemailcom
     - sensor.privat
-#    - calendar.contacts
-#    - sensor.contacts
-#    - calendar.friends_birthdays
     - sensor.geburtstagskalender
-#    - calendar.feiertage_in_deutschland
     - sensor.feiertage
+
 fenstertuer:
   name: Fenster und Türen
   entities:
     - binary_sensor.door_window_sensor_158d000153b0e1
+
+familie:
+  name: Familie
+  entities:
+    - device_tracker.stephansiphone
+    - device_tracker.androide3c5daf46596c063home
+
 wetterzsfg:
   name: Wetter
   entities:
     - sensor.dark_sky_summary
     - sensor.dark_sky_temperature
+
 akku:
   name: Akkustände
   entities:
@@ -133,7 +139,7 @@ applehomekit:
     - binary_sensor.stephan_ist_zu_Hause
     - device_tracker.androide3c5daf46596c063home
     - device_tracker.androidf0f89b5be25f73echome
-    - device_tracker.owntracks
+#    - device_tracker.owntracks
 
 szenen:
   name: Szenen
@@ -222,6 +228,7 @@ orte:
     - camera.jule
     - camera.jules_arbeitshandy
     - camera.owntracks
+    - group.applehomekit
 automatismenszenen:
   name: Automatismen & Szenen
   view: yes

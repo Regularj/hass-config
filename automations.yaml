@@ -8,8 +8,12 @@
   alias: "Lichter vergessen"
   trigger:
     platform: state
-    entity_id: device_tracker.stephansiphone, device_tracker.androide3c5daf46596c063home
+    entity_id: group.familie
     state: 'not_home'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
   condition:
     condition: or
     conditions:
@@ -30,7 +34,8 @@
       data:
         message: 'Ohje, Lichter sind noch an!'
         data:
-          keyboard: '/ausmachen'
+          keyboard: 
+            - '/ausmachen'
 - id: lichterbeiabwesenheitaus
   alias: "Lichter bei Abwesenheit aus"
   trigger:
@@ -40,11 +45,7 @@
         command: '/ausmachen'
   action:
     - service: light.turn_off
-      entity_id:
-        - light.wohnzimmer_licht
-        - light.speisesaal_licht
-        - light.bad_licht
-        - light.romy_licht
+      entity_id: light.wohnzimmer_licht, light.speisesaal_licht, light.bad_licht, light.romy_licht
 
 ############################################################################
 
