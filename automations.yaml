@@ -30,7 +30,7 @@
         entity_id: light.romy_licht
         state: 'on'
   action:
-    - service: notify.telegram
+    - service: notify.telegram_haushalt
       data:
         message: 'Ohje, Lichter sind noch an!'
         data:
@@ -104,16 +104,30 @@
 - id: nachtlicht
   alias: "Nachtlicht bei Bewegung"
   trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_158d00010f859c
-    from: 'no_motion'
-    to: 'motion'
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d00010f859c
+      from: 'off'
+      to: 'on'
   action:
-  - service: light.turn_on
+    service: homeassistant.turn_on
     entity_id: light.gateway_light_f0b429cc315f
     data:
       rgb_color: [255,197,121]
       brightness: 155
+- id: nachtlichtaus
+  alias: "Nachtlicht aus"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d00010f859c
+      to: 'off'
+      for:
+        minutes: 0
+        seconds: 30
+  action:
+    service: homeassistant.turn_off
+    data:
+      entity_id: light.gateway_light_f0b429cc315f
+
 - id: update
   alias: "Update Benachrichtigungen"
   trigger:

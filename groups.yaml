@@ -245,6 +245,7 @@ automatismenlicht:
     - automation.balkon_offen
     - automation.balkon_geschlossen
     - automation.nachtlicht_bei_bewegung
+    - automation.nachtlicht_aus
     - automation.fluxer_start
     - automation.lichter_bei_abwesenheit_aus
     - automation.lichter_vergessen
