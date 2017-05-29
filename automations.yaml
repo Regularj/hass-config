@@ -48,7 +48,10 @@
       entity_id: light.wohnzimmer_licht, light.speisesaal_licht, light.bad_licht, light.romy_licht
 
 ############################################################################
-
+#                                                                          #
+# Media-Player Automatismen (Licht aus, wenn Film läuft)                   #
+#                                                                          #
+############################################################################
 - id: mediaplayerpaused
   alias: "Media player paused/stopped"
   trigger:
@@ -63,6 +66,28 @@
   action:
     - service: scene.turn_on
       entity_id: scene.wohnzimmer_normal
+
+- id: mediaplayerplaying
+  alias: "Media player playing"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'playing'
+      from: 'idle'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.wohnzimmer_dimmen
+
+##########################################################################
+#                                                                        #
+# Wohnzimmerlicht aus, wenn Balkontür auf ist                            #
+#                                                                        #
+##########################################################################
+
 - id: balkonoffen
   alias: "Balkon offen"
   trigger:
@@ -87,33 +112,30 @@
   action:
     - service: light.turn_on
       entity_id: light.wohnzimmer_licht
-- id: mediaplayerplaying
-  alias: "Media player playing"
-  trigger:
-    - platform: state
-      entity_id: media_player.kodi
-      to: 'playing'
-      from: 'idle'
+
+#########################################################################
+#                                                                       #
+#                    Nachtlicht im Flur                                 #
+#                                                                       #
+#########################################################################
+
+- id: nachtlicht
+  alias: "Nachtlicht bei Bewegung"
   condition:
     - condition: state
       entity_id: sun.sun
       state: 'below_horizon'
-  action:
-    - service: scene.turn_on
-      entity_id: scene.wohnzimmer_dimmen
-- id: nachtlicht
-  alias: "Nachtlicht bei Bewegung"
   trigger:
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d00010f859c
       from: 'off'
       to: 'on'
   action:
-    service: homeassistant.turn_on
-    entity_id: light.gateway_light_f0b429cc315f
+    service: light.turn_on
     data:
-      rgb_color: [255,197,121]
-      brightness: 155
+      entity_id: light.gateway_light_f0b429cc315f
+#      color_name: chocolate
+      brightness: 115
 - id: nachtlichtaus
   alias: "Nachtlicht aus"
   trigger:
@@ -122,11 +144,17 @@
       to: 'off'
       for:
         minutes: 0
-        seconds: 30
+        seconds: 15
   action:
-    service: homeassistant.turn_off
+    service: light.turn_off
     data:
       entity_id: light.gateway_light_f0b429cc315f
+
+#########################################################################
+#                                                                       #
+#                Benachrichtigung bei Systemupdates                     #
+#                                                                       #
+#########################################################################
 
 - id: update
   alias: "Update Benachrichtigungen"
@@ -137,6 +165,13 @@
     service: notify.telegram
     data:
       message: 'Es gibt eine neue HASS-Version!'
+
+########################################################################
+#                                                                      #
+#         Fluxer Lichtanpassung beim HASS-Neustart aktivieren          #
+#                                                                      #
+########################################################################
+
 - id: fluxerstart
   alias: "Fluxer Start"
   trigger:

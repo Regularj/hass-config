@@ -37,6 +37,7 @@ alerts:
     - alert.bad_temperatur
     - alert.wohnzimmer_temperatur
     - alert.schlafzimmer_temperatur
+
 raumtemperaturen:
   name: Raumtemperaturen
   entities:
@@ -67,11 +68,6 @@ kalender:
     - sensor.geburtstagskalender
     - sensor.feiertage
 
-fenstertuer:
-  name: Fenster und Türen
-  entities:
-    - binary_sensor.door_window_sensor_158d000153b0e1
-
 familie:
   name: Familie
   entities:
@@ -83,6 +79,11 @@ wetterzsfg:
   entities:
     - sensor.dark_sky_summary
     - sensor.dark_sky_temperature
+
+fenstertuer:
+  name: Fenster und Türen
+  entities:
+    - binary_sensor.door_window_sensor_158d000153b0e1
 
 akku:
   name: Akkustände

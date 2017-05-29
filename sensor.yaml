@@ -197,6 +197,7 @@
       {% else %}
          mdi:battery-{{(states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level|float / 10)|round*10}}
       {%- endif %}'
+
 - platform: sonarr
   api_key: a3b159ca37664be78233a86afaf9602d
   host: 192.168.0.157
