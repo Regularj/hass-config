@@ -110,6 +110,3 @@
   switch.kaffeemaschine:
     friendly_name: Kaffeemaschine
     icon: mdi:coffee
-  device_tracker.chuangmiplugm1_miio55130143home:
-    friendly_name: Kaffeemaschine
-    icon: mdi:coffee
