@@ -69,22 +69,22 @@ group: !include groups.yaml
 light:
   - platform: yeelight
     devices:
-      192.168.0.80:
+      192.168.0.82:
         name: Wohnzimmer Licht
         transition: 350 
         use_music_mode: False
         save_on_change: True
-      192.168.0.124:
+      192.168.0.125:
         name: Romy Licht
         transition: 350
         use_music_mode: False
         save_on_change: True
-      192.168.0.148:
+      192.168.0.149:
         name: Bad Licht
         transition: 350
         use_music_mode: False
         save_on_change: True
-      192.168.0.109:
+      192.168.0.110:
         name: Speisesaal Licht
         transition: 350
         use_music_mode: False
@@ -92,21 +92,24 @@ light:
 
 # F.Lux Lichtwärme an Uhrzeit anpassen
 switch:
-  platform: flux
-  lights:
-    - light.wohnzimmer
-    - light.bad
-    - light.speisesaal
-    - light.gateway_light_f0b429cc315f
-  name: Fluxer
-  start_time: '5:45'
-  stop_time: '5:30'
-  start_colortemp: 5000
-  sunset_colortemp: 3400
-  stop_colortemp: 2700
-  disable_brightness_adjust: False
-  mode: mired
-
+  - platform: flux
+    lights:
+      - light.wohnzimmer
+      - light.bad
+      - light.speisesaal
+    name: Fluxer
+    start_time: '5:45'
+    stop_time: '5:30'
+    start_colortemp: 5000
+    sunset_colortemp: 3400
+    stop_colortemp: 2700
+    disable_brightness_adjust: False
+    mode: mired
+  - platform: xiaomiplug
+    host: 192.168.0.81
+    name: Kaffeemaschine
+    token: 8735e7bd8f10b45ea6708ba89c1a4f7b
+ 
 media_player:
   - platform: kodi
     host: 192.168.0.157
@@ -128,7 +131,7 @@ scene:
   - name: Wohnzimmer dimmen
     entities:
         light.wohnzimmer_licht:
-            state: on
+            state: off
             transition: 2
             brightness: 25
             xy_color: [ 0.5926, 0.3814 ]

@@ -26,6 +26,7 @@ zimmerdetails:
     - group.speisekammer
     - group.bad
     - group.schlafzimmer
+    - group.flur
 alerts:
   name: Achtung!
   entities:
@@ -60,6 +61,7 @@ lichter:
     - light.wohnzimmer_licht
     - light.bad_licht
     - light.speisesaal_licht
+    - light.gateway_light_f0b429cc315f
 
 kalender:
   name: Kalender
@@ -155,6 +157,7 @@ speisekammer:
   name: Küche
   entities:
     - light.speisesaal_licht
+    - switch.kaffeemaschine
 romy:
   name: Romys Zimmer
   entities:
@@ -168,6 +171,12 @@ wohnzimmer:
     - sensor.humidity_158d00011172f3
     - sensor.temperature_158d00011172f3
     - binary_sensor.door_window_sensor_158d000153b0e1
+flur:
+  name: Flur
+  entities:
+    - light.gateway_light_f0b429cc315f
+    - sensor.illumination_f0b429cc315f
+    - binary_sensor.motion_sensor_158d00010f859c
 bad:
   name: Badezimmer
   entities:
@@ -237,6 +246,7 @@ automatismenszenen:
     - group.szenen
     - group.automatismenlicht
     - group.automatismensystem
+    - group.automatismenstrom
 
 automatismenlicht:
   name: Lichtautomatismen
@@ -257,3 +267,10 @@ automatismensystem:
     - automation.update_benachrichtigungen
     - automation.keine_alarme
     - automation.alarme_neustart
+
+automatismenstrom:
+  name: Stromstecker
+  entities:
+    - automation.kaffee_in_der_woche
+    - automation.kaffee_am_wochenende
+    - automation.kaffeemaschine_aus

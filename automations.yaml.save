@@ -144,7 +144,7 @@
     service: light.turn_on
     data:
       entity_id: light.gateway_light_f0b429cc315f
-      color_name: orangered
+      color_name: cho
       brightness: 75
 - id: nachtlichtaus
   alias: "Nachtlicht aus"
@@ -195,52 +195,3 @@
     service: switch.turn_on
     entity_id:
       - switch.fluxer
-
-########################################################################
-#                                                                      #
-#               Kaffemaschine morgens an- und ausschalten              #
-#                                                                      #
-########################################################################
-
-- id: kaffeinderwoche
-  alias: "Kaffee in der Woche"
-  trigger:
-    - platform: time
-      at: '05:55:00'
-  condition:
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  action:
-    service: switch.turn_on
-    entity_id:
-      - switch.kaffeemaschine
-
-- id: kaffeeamwochenende
-  alias: "Kaffee am Wochenende"
-  trigger:
-    - platform: time
-      at: '07:00:00'
-  condition:
-    condition: time
-    weekday:
-    - sat
-    - sun
-  action:
-    service: switch.turn_on
-    entity_id:
-      - switch.kaffeemaschine
-
-- id: kaffeemaschineaus
-  alias: "Kaffeemaschine aus"
-  trigger:
-    - platform: time
-      at: '07:10:00'
-  action:
-    service: switch.turn_off
-    entity_id:
-      - switch.kaffeemaschine

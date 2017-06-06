@@ -83,9 +83,13 @@
   light.bad_licht:
     custom_ui_state_card: custom_light
     show_last_changed: true
-  licht.speisesaal_licht:
+  light.speisesaal_licht:
     custom_ui_state_card: custom_light
     show_last_changed: true
+  light.gateway_light_f0b429cc315f:
+    custom_ui_state_card: custom_light
+    show_last_changed: true
+    friendly_name: Nachtlicht
   device_tracker.androide3c5daf46596c063home:
     friendly_name: Jule
     icon: mdi:cellphone-android
@@ -98,3 +102,14 @@
   device_tracker.stephansiphone:
     friendly_name: Stephan
     icon: mdi:cellphone-iphone
+  binary_sensor.motion_sensor_158d00010f859c:
+    friendly_name: Bewegungsmelder
+  sensor.illumination_f0b429cc315f:
+    friendly_name: Helligkeit
+    icon: mdi:lightbulb-outline
+  switch.kaffeemaschine:
+    friendly_name: Kaffeemaschine
+    icon: mdi:coffee
+  device_tracker.chuangmiplugm1_miio55130143home:
+    friendly_name: Kaffeemaschine
+    icon: mdi:coffee
