@@ -102,6 +102,8 @@ hasspi:
   name: HomeAssistant
   entities:
     - sensor.since_last_boot_templated
+    - sensor.aktuelle_Version
+    - sensor.installierte_Version
 
 media:
   name: Media

@@ -124,7 +124,7 @@ scene:
     entities:
         light.wohnzimmer_licht:
             state: on
-            transition: 2
+            transition: 15
             brightness: 250
             xy_color: [ 0.4448, 0.4066 ]
         
@@ -132,7 +132,7 @@ scene:
     entities:
         light.wohnzimmer_licht:
             state: off
-            transition: 2
+            transition: 15
             brightness: 25
             xy_color: [ 0.5926, 0.3814 ]
 
