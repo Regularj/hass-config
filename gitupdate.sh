@@ -2,7 +2,7 @@
 
 #cd /home/homeassistant/.homeassistant
 #source /srv/homeassistant/homeassistant_venv/bin/activate
-/srv/homeassistant//bin/hass --script check_config
+#/srv/homeassistant//bin/hass --script check_config
 
 git add .
 git status

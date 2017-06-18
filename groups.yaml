@@ -110,6 +110,7 @@ media:
   entities:
     - media_player.kodi
     - media_player.vlc
+    - media_player.samsung_wireless_audio_spkwam7500
 
 nzbget:
   name: NZBGet
