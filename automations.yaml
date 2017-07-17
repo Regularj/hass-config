@@ -115,10 +115,10 @@
       entity_id: binary_sensor.door_window_sensor_158d000153b0e1
       from: 'on'
       to: 'off'
-  condition:
-    - condition: state
-      entity_id: light.wohnzimmer
-      state: 'on'
+#  condition:
+#    - condition: state
+#      entity_id: light.wohnzimmer
+#      state: 'on'
   action:
     - service: light.turn_on
       entity_id: light.wohnzimmer_licht
