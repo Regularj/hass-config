@@ -1,279 +1,267 @@
 default_view:
-  view: yes
+  view: true
   entities:
-    - group.alerts
-    - group.wetter
-    - group.lichter
-    - group.kalender
-    - group.wetterzsfg
-    - group.luftfeuchtigkeiten
-    - group.raumtemperaturen
-    - group.fenstertuer
-    - group.familie
-
+  - group.alerts
+  - group.wetter
+  - group.lichter
+  - group.kalender
+  - group.wetterzsfg
+  - group.luftfeuchtigkeiten
+  - group.raumtemperaturen
+  - group.fenstertuer
+  - group.familie
 weltall:
   name: Weltall
   entities:
-    - binary_sensor.iss
-    - sensor.moon
-
+  - binary_sensor.iss
+  - sensor.moon
 zimmerdetails:
-  name: Übersicht Zimmer
-  view: yes
+  name: "\xDCbersicht Zimmer"
+  view: true
   entities:
-    - group.romy
-    - group.wohnzimmer
-    - group.speisekammer
-    - group.bad
-    - group.schlafzimmer
-    - group.flur
+  - group.romy
+  - group.wohnzimmer
+  - group.speisekammer
+  - group.bad
+  - group.schlafzimmer
+  - group.flur
 alerts:
   name: Achtung!
   entities:
-    - alert.romy_feuchtigkeit
-    - alert.bad_feuchtigkeit
-    - alert.wohnzimmer_feuchtigkeit
-    - alert.schlafzimmer_feuchtigkeit
-    - alert.romy_temperatur
-    - alert.bad_temperatur
-    - alert.wohnzimmer_temperatur
-    - alert.schlafzimmer_temperatur
-
+  - alert.romy_feuchtigkeit
+  - alert.bad_feuchtigkeit
+  - alert.wohnzimmer_feuchtigkeit
+  - alert.schlafzimmer_feuchtigkeit
+  - alert.romy_temperatur
+  - alert.bad_temperatur
+  - alert.wohnzimmer_temperatur
+  - alert.schlafzimmer_temperatur
 raumtemperaturen:
   name: Raumtemperaturen
   entities:
-    - sensor.temperature_158d0001100456
-    - sensor.temperature_158d00011172f3
-    - sensor.temperature_158d00012bf206
-    - sensor.temperature_158d00012914cb
-
+  - sensor.temperature_158d0001100456
+  - sensor.temperature_158d00011172f3
+  - sensor.temperature_158d00012bf206
+  - sensor.temperature_158d00012914cb
 luftfeuchtigkeiten:
   name: Luftfeuchtigkeiten
   entities:
-    - sensor.humidity_158d0001100456
-    - sensor.humidity_158d00011172f3
-    - sensor.humidity_158d00012bf206
-    - sensor.humidity_158d00012914cb
+  - sensor.humidity_158d0001100456
+  - sensor.humidity_158d00011172f3
+  - sensor.humidity_158d00012bf206
+  - sensor.humidity_158d00012914cb
 lichter:
   name: Lichter
   entities:
-    - light.romy_licht
-    - light.wohnzimmer_licht
-    - light.bad_licht
-    - light.speisesaal_licht
-    - light.gateway_light_f0b429cc315f
+  - light.gateway_light_f0b429cc315f
+  - light.romy_licht
+  - light.wohnzimmer_licht
+  - light.bad_licht
+  - light.speisesaal_licht
 
 kalender:
   name: Kalender
   entities:
-    - sensor.privat
-    - sensor.geburtstagskalender
-    - sensor.feiertage
-
+  - sensor.privat
+  - sensor.geburtstagskalender
+  - sensor.feiertage
 familie:
   name: Familie
   entities:
-    - device_tracker.stephansiphone
-    - device_tracker.androide3c5daf46596c063home
-
+  - device_tracker.stephansiphone
+  - device_tracker.androide3c5daf46596c063home
 wetterzsfg:
   name: Wetter
   entities:
-    - sensor.dark_sky_summary
-    - sensor.dark_sky_temperature
-
+  - sensor.dark_sky_summary
+  - sensor.dark_sky_temperature
 fenstertuer:
-  name: Fenster und Türen
+  name: "Fenster und Türen"
   entities:
-    - binary_sensor.door_window_sensor_158d000153b0e1
-
-akku:
-  name: Akkustände
-  entities:
-    - sensor.battery_stephansiphone
-    - sensor.battery_applewatch
-    - sensor.battery_hygro_wohnzimmer
-    - sensor.battery_hygro_romy
-    - sensor.battery_bewegungsmelder
-    - sensor.battery_hygro_bad
-    - sensor.battery_hygro_schlafzimmer
-    - sensor.battery_balkon
-hasspi:
-  name: HomeAssistant
-  entities:
-    - sensor.since_last_boot_templated
-    - sensor.aktuelle_Version
-    - sensor.installierte_Version
-
+  - binary_sensor.door_window_sensor_158d000153b0e1
 media:
   name: Media
   entities:
-    - media_player.kodi
-    - media_player.vlc
-    - media_player.samsung_wireless_audio_spkwam7500
-
+  - media_player.kodi
+  - media_player.itunes
+akku:
+  name: "Akkustände"
+  entities:
+  - sensor.battery_stephansiphone
+  - sensor.battery_applewatch
+  - sensor.battery_hygro_wohnzimmer
+  - sensor.battery_hygro_romy
+  - sensor.battery_bewegungsmelder
+  - sensor.battery_hygro_bad
+  - sensor.battery_hygro_schlafzimmer
+  - sensor.battery_balkon
+hasspi:
+  name: HomeAssistant
+  entities:
+  - sensor.since_last_boot_templated
+  - sensor.aktuelle_Version
+  - sensor.installierte_Version
 nzbget:
   name: NZBGet
   entities:
-    - sensor.nzbget_speed
-    - sensor.nzbget_queue_size
-    - sensor.nzbget_article_cache
-    - sensor.nzbget_disk_free
+  - sensor.nzbget_speed
+  - sensor.nzbget_queue_size
+  - sensor.nzbget_article_cache
+  - sensor.nzbget_disk_free
 sonarr:
   name: Sonarr
   entities:
-    - sensor.sonarr_upcoming
-    - sensor.sonarr_wanted
-    - sensor.sonarr_queue
-    - sensor.sonarr_disk_space
+  - sensor.sonarr_upcoming
+  - sensor.sonarr_wanted
+  - sensor.sonarr_queue
+  - sensor.sonarr_disk_space
 hintergrundtechnik:
   name: Technik
-  view: yes
+  view: true
   entities:
-    - group.hintergrund
-    - group.nzbget
-    - group.sonarr
-    - group.media
-    - group.akku
-    - group.hasspi
-    - group.switches
-
+  - group.hintergrund
+  - group.nzbget
+  - group.sonarr
+  - group.media
+  - group.akku
+  - group.hasspi
+  - group.switches
 applehomekit:
   name: Anwesenheitskontrolle
   entities:
-    - device_tracker.stephansiphone
-    - binary_sensor.stephan_ist_zu_Hause
-    - device_tracker.androide3c5daf46596c063home
-    - device_tracker.androidf0f89b5be25f73echome
-#    - device_tracker.owntracks
-
+  - device_tracker.stephansiphone
+  - binary_sensor.stephan_ist_zu_Hause
+  - device_tracker.androide3c5daf46596c063home
+  - device_tracker.androidf0f89b5be25f73echome
 szenen:
   name: Szenen
   entities:
-    - scenes.wohnzimmer_normal
-    - scenes.wohnzimmer_dimmen
+  - scenes.wohnzimmer_normal
+  - scenes.wohnzimmer_dimmen
 switches:
   name: Switches
   entities:
-    - switch.fluxer
+  - switch.fluxer
 speisekammer:
-  name: Küche
+  name: "Küche"
   entities:
-    - light.speisesaal_licht
-    - switch.kaffeemaschine
+  - light.speisesaal_licht
+  - switch.kaffeemaschine
+  - switch.speisesaal_radio
 romy:
   name: Romys Zimmer
   entities:
-    - light.romy_licht
-    - sensor.humidity_158d0001100456
-    - sensor.temperature_158d0001100456
+  - light.romy_licht
+  - sensor.humidity_158d0001100456
+  - sensor.temperature_158d0001100456
 wohnzimmer:
   name: Wohnzimmer
   entities:
-    - light.wohnzimmer_licht
-    - sensor.humidity_158d00011172f3
-    - sensor.temperature_158d00011172f3
-    - binary_sensor.door_window_sensor_158d000153b0e1
+  - light.wohnzimmer_licht
+  - sensor.humidity_158d00011172f3
+  - sensor.temperature_158d00011172f3
+  - binary_sensor.door_window_sensor_158d000153b0e1
 flur:
   name: Flur
   entities:
-    - light.gateway_light_f0b429cc315f
-    - sensor.illumination_f0b429cc315f
-    - binary_sensor.motion_sensor_158d00010f859c
+  - light.gateway_light_f0b429cc315f
+  - sensor.illumination_f0b429cc315f
+  - binary_sensor.motion_sensor_158d00010f859c
 bad:
   name: Badezimmer
   entities:
-    - light.bad_licht
-    - sensor.humidity_158d00012bf206
-    - sensor.temperature_158d00012bf206
+  - light.bad_licht
+  - sensor.humidity_158d00012bf206
+  - sensor.temperature_158d00012bf206
+  - switch.bad_radio
 schlafzimmer:
   name: Schlafzimmer
   entities:
-    - sensor.humidity_158d00012914cb
-    - sensor.temperature_158d00012914cb
+  - sensor.humidity_158d00012914cb
+  - sensor.temperature_158d00012914cb
 wetterdetails:
   name: Aussenwelt
-  view: yes
+  view: true
   entities:
-    - group.wetterjetzt
-    - group.wettervorhersage
-    - group.wind
-    - group.temperaturen
-    - group.niederschlag
-    - group.weltall
+  - group.wetterjetzt
+  - group.wettervorhersage
+  - group.wind
+  - group.temperaturen
+  - group.niederschlag
+  - group.weltall
 wetterjetzt:
   name: Wetterstatus
   entities:
-    - sensor.dark_sky_summary
-    - sun.sun
+  - sensor.dark_sky_summary
+  - sun.sun
 wettervorhersage:
   name: Vorhersage
   entities:
-    - sensor.dark_sky_hourly_summary
-    - sensor.dark_sky_daily_summary
+  - sensor.dark_sky_hourly_summary
+  - sensor.dark_sky_daily_summary
 wind:
   name: Wind
   entities:
-    - sensor.dark_sky_wind_speed
-    - sensor.dark_sky_wind_bearing
-    - sensor.dark_sky_pressure
+  - sensor.dark_sky_wind_speed
+  - sensor.dark_sky_wind_bearing
+  - sensor.dark_sky_pressure
 temperaturen:
   name: Temperaturen
   entities:
-    - sensor.dark_sky_temperature
-    - sensor.dark_sky_temperature_max
-    - sensor.dark_sky_temperature_min
-    - sensor.dark_sky_apparent_temperature
-    - sensor.dark_sky_dew_point
+  - sensor.dark_sky_temperature
+  - sensor.dark_sky_temperature_max
+  - sensor.dark_sky_temperature_min
+  - sensor.dark_sky_apparent_temperature
+  - sensor.dark_sky_dew_point
 niederschlag:
   name: Niederschlag
   entities:
-    - sensor.dark_sky_humidity
-    - sensor.dark_sky_precip_type
-    - sensor.dark_sky_precip_intensity
-    - sensor.dark_sky_precip_probability
-    - sensor.dark_sky_cloud_coverage
+  - sensor.dark_sky_humidity
+  - sensor.dark_sky_precip_type
+  - sensor.dark_sky_precip_intensity
+  - sensor.dark_sky_precip_probability
+  - sensor.dark_sky_cloud_coverage
 orte:
   name: Orte
-  view: yes
+  view: true
   entities:
-    - camera.stephan
-    - camera.jule
-    - camera.jules_arbeitshandy
-    - camera.owntracks
-    - group.applehomekit
+  - camera.stephan
+  - camera.jule
+  - camera.jules_arbeitshandy
+  - camera.owntracks
+  - group.applehomekit
 automatismenszenen:
   name: Automatismen & Szenen
-  view: yes
+  view: true
   entities:
-    - group.szenen
-    - group.automatismenlicht
-    - group.automatismensystem
-    - group.automatismenstrom
-
+  - group.szenen
+  - group.automatismenlicht
+  - group.automatismensystem
+  - group.automatismenstrom
 automatismenlicht:
   name: Lichtautomatismen
   entities:
-    - automation.media_player_playing
-    - automation.media_player_pausedstopped
-    - automation.balkon_offen
-    - automation.balkon_geschlossen
-    - automation.nachtlicht_bei_bewegung
-    - automation.nachtlicht_aus
-    - automation.fluxer_start
-    - automation.lichter_bei_abwesenheit_aus
-    - automation.lichter_vergessen
-
+  - automation.media_player_playing
+  - automation.media_player_pausedstopped
+  - automation.balkon_offen
+  - automation.balkon_geschlossen
+  - automation.nachtlicht_bei_bewegung
+  - automation.nachtlicht_aus
+  - automation.fluxer_start
+  - automation.lichter_bei_abwesenheit_aus
+  - automation.lichter_vergessen
 automatismensystem:
   name: Systemautomatismen
   entities:
-    - automation.update_benachrichtigungen
-    - automation.keine_alarme
-    - automation.alarme_neustart
-
+  - automation.update_benachrichtigungen
+  - automation.keine_alarme
+  - automation.alarme_neustart
 automatismenstrom:
-  name: Stromstecker
+  name: Strom
   entities:
-    - automation.kaffee_in_der_woche
-    - automation.kaffee_am_wochenende
-    - automation.kaffeemaschine_aus
+  - automation.kaffee_in_der_woche
+  - automation.kaffee_am_wochenende
+  - automation.kaffeemaschine_aus
+  - automation.radio_an_wochentags
+  - automation.radio_aus_wochentags
+  - automation.radio_an_wochenende

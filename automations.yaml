@@ -244,3 +244,58 @@
     service: switch.turn_off
     entity_id:
       - switch.kaffeemaschine
+
+######################################################
+#                                                    #
+#               Morgends Radio an                    #
+#                                                    # 
+######################################################
+
+- id: Radioanwoche
+  alias: "Radio an Wochentags"
+  trigger: 
+    - platform: time
+      at: '06:10:00'
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    - service: shell_command.radiokueche
+    - service: shell_command.radiobad
+
+- id: Radioanwochenende
+  alias: "Radio an Wochenende"
+  trigger:
+    - platform: time
+      at: '06:10:00'
+  condition:
+    condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+    - service: shell_command.radiokueche
+    - service: shell_command.radiobad
+
+- id: Radioauswoche
+  alias: "Radio aus Wochentags"
+  trigger:
+    - platform: time
+      at: '08:00:00'
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    - service: shell_command.radiokuecheaus
+    - service: shell_command.radiobadaus
+

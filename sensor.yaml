@@ -218,7 +218,7 @@
 ##################################################
 
 - platform: sonarr
-  api_key: a3b159ca37664be78233a86afaf9602d
+  api_key: d968f5c7508344a8ac7015f4ed4ca97a
   host: 192.168.0.157
   port: 8989
   monitored_conditions:

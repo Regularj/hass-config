@@ -75,19 +75,19 @@
   sensor.dark_sky_pressure:
     friendly_name: Luftdruck
   light.wohnzimmer_licht:
-    custom_ui_state_card: custom_light
+#    custom_ui_state_card: custom_light
     show_last_changed: true
   light.romy_licht:
-    custom_ui_state_card: custom_light
+#    custom_ui_state_card: custom_light
     show_last_changed: true
   light.bad_licht:
-    custom_ui_state_card: custom_light
+#    custom_ui_state_card: custom_light
     show_last_changed: true
   light.speisesaal_licht:
-    custom_ui_state_card: custom_light
+#    custom_ui_state_card: custom_light
     show_last_changed: true
   light.gateway_light_f0b429cc315f:
-    custom_ui_state_card: custom_light
+#    custom_ui_state_card: custom_light
     show_last_changed: true
     friendly_name: Nachtlicht
   device_tracker.androide3c5daf46596c063home:
@@ -110,3 +110,9 @@
   switch.kaffeemaschine:
     friendly_name: Kaffeemaschine
     icon: mdi:coffee
+  switch.bad_radio:
+    friendly_name: Badradio
+    icon: mdi:radio
+  switch.speisesaal_radio:
+    friendly_name: Küchenradio
+    icon: mdi:radio

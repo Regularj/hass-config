@@ -69,7 +69,7 @@ group: !include groups.yaml
 light:
   - platform: yeelight
     devices:
-      192.168.0.81:
+      192.168.0.82:
         name: Wohnzimmer Licht
         transition: 350 
         use_music_mode: False
@@ -106,17 +106,9 @@ switch:
     disable_brightness_adjust: False
     mode: mired
   - platform: xiaomiplug
-    host: 192.168.0.82
+    host: 192.168.0.81
     name: Kaffeemaschine
     token: 8735e7bd8f10b45ea6708ba89c1a4f7b
-  - platform: command_line
-    switches:
-      speisesaal_radio:
-        command_on: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 fav1"
-        command_off: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 stop"
-      bad_radio:
-        command_on: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 fav1"
-        command_off: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 stop"
  
 media_player:
   - platform: kodi
@@ -124,9 +116,9 @@ media_player:
     name: Kodi
     port: 80
     enable_websocket: false
-  - platform: itunes
-    host: 192.168.0.169
-
+#  - platform: vlc
+#    arguments: '--rc-host=192.168.0.157:8080' 
+#    name: VLC
 scene:
   - name: Wohnzimmer normal
     entities:
@@ -185,14 +177,14 @@ device_tracker:
     password: !secret icloud
     account_name: Stephans iPhone
   - platform: nmap_tracker
-    hosts: 192.168.0.1/24
+    hosts: 192.168.0.1-255
     consider_home: 360
     home_interval: 1
     track_new_devices: yes
     exclude:
       - 192.168.0.1
       - 192.168.0.157
-      - 192.168.0.121
+      - 192.168.0.120
 #  - platform: owntracks
 
 #mqtt:
@@ -354,7 +346,8 @@ camera:
 #    limit_refetch_to_url_change: true
 
 shell_command:
-  radiokueche: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 fav1'
-  radiobad: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 fav1'
-  radiokuecheaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 stop'
-  radiobadaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 stop'
+  radiokueche: /home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 fav1
+  radiobad: /home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 fav1
+  radiokuecheaus: /home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 stop
+  radiobadaus: /home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 stop
+
