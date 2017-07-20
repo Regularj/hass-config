@@ -272,3 +272,46 @@
 - platform: command_line
   name: "installierte Version"
   command: "/srv/homeassistant/bin/hass --version"
+
+
+#################################################
+#                                               #
+#     Sensor für Xiaomi-Versionsverfolgung      #
+#                                               #
+#################################################
+
+- platform: command_line
+  name: "Current Xiaomi Version"
+  scan_interval: 3600
+  command: python3 -c "import requests; print(requests.get('https://api.github.com/repos/Danielhiversen/homeassistant/commits/master').json()['sha'])"
+
+- platform: command_line
+  name: "Xiaomi Installed version"
+  scan_interval: 3600
+  command: "cat /home/homeassistant/.homeassistant/GitHub-Komponenten/Xiaomi-Gateway/.git/FETCH_HEAD | cut -c 1-40"
+
+- platform: command_line
+  name: "Commit Xiaomi Version Date"
+  scan_interval: 3600
+  command: python3 -c "import requests; print(requests.get('https://api.github.com/repos/Danielhiversen/homeassistant/commits/master').json()['commit']['author']['date'])"
+
+- platform: template
+  sensors:
+    xiaomi_update:
+      friendly_name: 'Xiaomi Status' 
+      value_template: '{%- if states.sensor.xiaomi_installed_version.state == states.sensor.current_xiaomi_version.state -%}
+                           Updated
+                       {%- else -%}
+                           NOT Updated
+                       {%- endif -%}'
+      icon_template: '{%- if states.sensor.xiaomi_installed_version.state == states.sensor.current_xiaomi_version.state -%}
+                          mdi:thumb-up-outline
+                      {%- else -%}
+                          mdi:thumb-down-outline
+                      {%- endif -%}'
+
+- platform: template
+  sensors:
+    current_xiaomi_version_date:
+      friendly_name: 'Version Date'
+      value_template: '{{ as_timestamp(states.sensor.commit_xiaomi_version_date.state) | timestamp_custom("%d.%m.%Y@%H:%M") }}'
