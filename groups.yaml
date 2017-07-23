@@ -99,10 +99,8 @@ hasspi:
   name: HomeAssistant
   entities:
   - sensor.since_last_boot_templated
-  - sensor.aktuelle_Version
-  - sensor.installierte_Version
   - sensor.xiaomi_update
-  - sensor.current_xiaomi_version_date
+  - sensor.xiaomiplug_update
 nzbget:
   name: NZBGet
   entities:

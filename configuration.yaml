@@ -176,7 +176,7 @@ telegram_bot:
 
 xiaomi:
   gateways:
-    - sid: f0b429cc315f
+    - mac: f0b429cc315f
       key: 4qmrkdu6abglo8zg
 
 device_tracker:
