@@ -99,7 +99,6 @@ hasspi:
   name: HomeAssistant
   entities:
   - sensor.since_last_boot_templated
-  - sensor.xiaomi_update
   - sensor.xiaomiplug_update
 nzbget:
   name: NZBGet
@@ -130,7 +129,7 @@ applehomekit:
   name: Anwesenheitskontrolle
   entities:
   - device_tracker.stephansiphone
-  - binary_sensor.stephan_ist_zu_Hause
+  - input_boolean.stephanishome
   - device_tracker.androide3c5daf46596c063home
   - device_tracker.androidf0f89b5be25f73echome
 szenen:

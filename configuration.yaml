@@ -43,7 +43,7 @@ discovery:
 # conversation:
 
 # Enables support for tracking state changes over time.
-#history:
+history:
 
 # View all events in a logbook
 logbook:
@@ -253,12 +253,12 @@ alert:
       - telegram_haushalt
 
 binary_sensor:
-  - platform: command_line
-    command: 'ls /home/pi/.homebridge/homebridge-status | grep -i "stephan_home" | wc -l'
-    name: Stephan ist zu Hause
-    payload_on: 1
-    payload_off: 0
-    scan_interval: 30
+#  - platform: command_line
+#    command: 'ls /home/pi/.homebridge/homebridge-status | grep -i "stephan_home" | wc -l'
+#    name: Stephan ist zu Hause
+#    payload_on: 1
+#    payload_off: 0
+#    scan_interval: 30
   - platform: iss
   - platform: template
     sensors:
@@ -358,3 +358,8 @@ shell_command:
   radiobad: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 fav1'
   radiokuecheaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.92 stop'
   radiobadaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.29 stop'
+
+input_boolean:
+  stephanishome:
+    icon: mdi:home
+    name: Home

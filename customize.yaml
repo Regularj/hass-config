@@ -93,8 +93,8 @@
   device_tracker.androide3c5daf46596c063home:
     friendly_name: Jule
     icon: mdi:cellphone-android
-  binary_sensor.stephan_ist_zu_hause:
-    friendly_name: Stephan
+  input_boolean.stephanishome:
+    friendly_name: Stephan (iPhone)
     icon: mdi:cellphone-iphone
   device_tracker.androidf0f89b5be25f73echome:
     friendly_name: Jules Arbeitshandy

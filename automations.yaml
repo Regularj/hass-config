@@ -9,7 +9,7 @@
   trigger:
     platform: state
     entity_id: group.familie
-    state: 'not_home'
+    to: 'not_home'
     for:
       hours: 0
       minutes: 15
@@ -81,8 +81,8 @@
   action:
     - service: light.turn_off
       entity_id: light.wohnzimmer_licht
-#    - service: scene.turn_on
-#      entity_id: scene.wohnzimmer_dimmen
+    - service: scene.turn_on
+      entity_id: scene.wohnzimmer_dimmen
 
 ##########################################################################
 #                                                                        #
@@ -95,7 +95,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d000153b0e1
-      state: 'on'
+      to: 'on'
   condition:
     condition: or
     conditions:
@@ -115,10 +115,6 @@
       entity_id: binary_sensor.door_window_sensor_158d000153b0e1
       from: 'on'
       to: 'off'
-#  condition:
-#    - condition: state
-#      entity_id: light.wohnzimmer
-#      state: 'on'
   action:
     - service: light.turn_on
       entity_id: light.wohnzimmer_licht
@@ -131,10 +127,10 @@
 
 - id: nachtlicht
   alias: "Nachtlicht bei Bewegung"
-#  condition:
-#    - condition: state
-#      entity_id: sun.sun
-#      state: 'below_horizon'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
   trigger:
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d00010f859c
@@ -151,14 +147,14 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d00010f859c
-      state: 'off'
+      to: 'off'
       for:
         minutes: 0
         seconds: 15
     - platform: numeric_state
       entity_id: sensor.illumination_f0b429cc315f
       value_template: '{{states.sensor.illumination_f0b429cc315f.state | int}}'
-      above: 700
+      above: '400'
   action:
     service: light.turn_off
     data:
@@ -173,12 +169,18 @@
 - id: update
   alias: "Update Benachrichtigungen"
   trigger:
-      platform: state
-      entity_id: updater.updater
+    platform: state
+    entity_id: sensor.installierte_HA_Version
   action:
     service: notify.telegram
     data:
-      message: 'Es gibt eine neue HASS-Version!'
+      message: 'Es gibt eine neue HA-Version: {{ states.sensor.installierte_version.state }}!'
+#      platform: state
+#      entity_id: updater.updater
+#  action:
+#    service: notify.telegram
+#    data:
+#      message: 'Es gibt eine neue HASS-Version!'
 
 ########################################################################
 #                                                                      #
