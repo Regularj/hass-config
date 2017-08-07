@@ -94,17 +94,16 @@ light:
 switch:
   - platform: flux
     lights:
-      - light.wohnzimmer_licht
-      - light.bad_licht
-      - light.speisesaal_licht
-      - light.romy_licht
+      - light.wohnzimmer
+      - light.bad
+      - light.speisesaal
     name: Fluxer
     start_time: '5:45'
     stop_time: '5:30'
     start_colortemp: 5000
     sunset_colortemp: 3400
     stop_colortemp: 2700
-    disable_brightness_adjust: True
+    disable_brightness_adjust: False
     mode: mired
   - platform: xiaomiplug
     host: 192.168.0.82
@@ -133,17 +132,16 @@ scene:
     entities:
         light.wohnzimmer_licht:
             state: on
-            transition: 2
+            transition: 15
             brightness: 250
             xy_color: [ 0.4448, 0.4066 ]
-        
   - name: Wohnzimmer dimmen
     entities:
         light.wohnzimmer_licht:
             state: on
-            transition: 2
-            brightness: 10
-            xy_color: [ 0.5926, 0.3814 ]
+            transition: 15
+            brightness: 75
+            xy_color: [ 0.4448, 0.3814 ]
 
 
 ##
@@ -181,6 +179,10 @@ xiaomi:
       key: 4qmrkdu6abglo8zg
 
 device_tracker:
+  - platform: icloud
+    username: regularj@pictor.uberspace.de
+    password: !secret icloud
+    account_name: Stephans iPhone
   - platform: nmap_tracker
     hosts: 192.168.0.1/24
     consider_home: 360
@@ -190,15 +192,11 @@ device_tracker:
       - 192.168.0.1
       - 192.168.0.157
       - 192.168.0.121
-  - platform: owntracks
-  - platform: icloud
-    username: regularj@pictor.uberspace.de
-    password: !secret icloud
-    account_name: Stephans iPhone
+#  - platform: owntracks
 
-mqtt:
-  broker: 95.143.172.207
-  port: 62977
+#mqtt:
+#  broker: 95.143.172.207
+#  port: 62977
 
 alert:
   romy_feuchtigkeit:
@@ -341,9 +339,6 @@ camera:
     platform: generic
     still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.stephansiphone.attributes.latitude }},{{ states.device_tracker.stephansiphone.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{ states.device_tracker.stephansiphone.attributes.latitude }},{{ states.device_tracker.stephansiphone.attributes.longitude }}
     limit_refetch_to_url_change: true
-  - name: Wettervorhersage
-    platform: generic
-    still_image_url: https://api.sat24.com/animated/DE/rainTMC/3/W_dot_%20Europe%20Standard%20Time/8514913
 #  - name: Jule
 #    platform: generic
 #    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:red%7Clabel:J%7C{{ states.device_tracker.androide3c5daf46596c063home.attributes.latitude }},{{ states.device_tracker.androide3c5daf46596c063home.attributes.longitude }}
@@ -367,5 +362,3 @@ input_boolean:
   stephanishome:
     icon: mdi:home
     name: Home
-
-shopping_list:

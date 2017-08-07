@@ -1,0 +1,27 @@
+
+apple_watchvonstephan:
+  hide_if_away: false
+  icon:
+  mac:
+  name: "Apple\_Watch von Stephan"
+  picture:
+  track: true
+  vendor:
+
+stephansiphone:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Stephans iPhone
+  picture:
+  track: true
+  vendor:
+
+stephansmacbookair:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Stephans MacBook Air
+  picture:
+  track: true
+  vendor:

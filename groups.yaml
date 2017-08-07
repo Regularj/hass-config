@@ -75,6 +75,7 @@ wetterzsfg:
   entities:
   - sensor.dark_sky_summary
   - sensor.dark_sky_temperature
+  - camera.wettervorhersage
 fenstertuer:
   name: "Fenster und Türen"
   entities:

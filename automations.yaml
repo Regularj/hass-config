@@ -73,13 +73,12 @@
     - platform: state
       entity_id: media_player.kodi
       to: 'playing'
-      from: 'idle'
   condition:
     - condition: state
       entity_id: sun.sun
       state: 'below_horizon'
   action:
-    - service: light.turn_off
+    - service: light.turn_on
       entity_id: light.wohnzimmer_licht
     - service: scene.turn_on
       entity_id: scene.wohnzimmer_dimmen
@@ -128,9 +127,10 @@
 - id: nachtlicht
   alias: "Nachtlicht bei Bewegung"
   condition:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
+    - condition: numeric_state
+      entity_id: sensor.illumination_f0b429cc315f
+      value_template: '{{states.sensor.illumination_f0b429cc315f.state | int}}'
+      below: '400'
   trigger:
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d00010f859c
