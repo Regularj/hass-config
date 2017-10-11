@@ -52,7 +52,7 @@ logger:
 
 # Alte Events, States löschen
 recorder:
-  purge_interval: 5
+  purge_days: 14
 
 # Track the sun
 sun:
@@ -184,7 +184,7 @@ telegram_bot:
 ## Xiaomi Gateway
 ##
 
-xiaomi_aqara:
+xiaomi:
   gateways:
     - mac: f0b429cc315f
       key: 4qmrkdu6abglo8zg
@@ -195,11 +195,14 @@ device_tracker:
     consider_home: 1800
     home_interval: 5
     scan_options: " --privileged -sP "
-    track_new_devices: yes
-#  - platform: ping
-#    hosts:
-#      stephan: 192.168.0.198
-#      jule: 192.168.0.39
+    track_new_devices: no
+    exclude:
+      - 192.168.0.120
+      - 192.168.0.157
+  - platform: ping
+    hosts:
+      stephan: 192.168.0.198
+      jule: 192.168.0.39
 
 mqtt:
   broker: 95.143.172.207

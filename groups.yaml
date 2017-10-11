@@ -13,8 +13,9 @@ default_view:
 weltall:
   name: Weltall
   entities:
-  - binary_sensor.iss
   - sensor.moon
+  - binary_sensor.iss
+  - camera.iss
 zimmerdetails:
   name: "\xDCbersicht Zimmer"
   view: true
@@ -58,6 +59,7 @@ lichter:
   - light.wohnzimmer_licht
   - light.bad_licht
   - light.speisesaal_licht
+  - light.bettlicht
 
 kalender:
   name: Kalender
@@ -68,14 +70,15 @@ kalender:
 familie:
   name: Familie
   entities:
-  - device_tracker.stephansiphone
-  - device_tracker.androide3c5daf46596c063home
+  - device_tracker.stephan
+  - device_tracker.jule
+  - device_tracker.ping
 wetterzsfg:
   name: Wetter
   entities:
   - sensor.dark_sky_summary
   - sensor.dark_sky_temperature
-  - camera.wettervorhersage
+  - camera.regenradar
 fenstertuer:
   name: "Fenster und Türen"
   entities:
@@ -126,13 +129,11 @@ hintergrundtechnik:
   - group.akku
   - group.hasspi
   - group.switches
-applehomekit:
+anwesenheiten:
   name: Anwesenheitskontrolle
   entities:
-  - device_tracker.stephansiphone
-  - input_boolean.stephanishome
-  - device_tracker.androide3c5daf46596c063home
-  - device_tracker.androidf0f89b5be25f73echome
+  - device_tracker.stephan
+  - device_tracker.jule
 szenen:
   name: Szenen
   entities:
@@ -179,6 +180,7 @@ schlafzimmer:
   entities:
   - sensor.humidity_158d00012914cb
   - sensor.temperature_158d00012914cb
+  - light.bettlicht
 wetterdetails:
   name: Aussenwelt
   view: true
@@ -221,15 +223,15 @@ niederschlag:
   - sensor.dark_sky_precip_intensity
   - sensor.dark_sky_precip_probability
   - sensor.dark_sky_cloud_coverage
-orte:
-  name: Orte
-  view: true
-  entities:
-  - camera.stephan
-  - camera.jule
-  - camera.jules_arbeitshandy
-  - camera.owntracks
-  - group.applehomekit
+#orte:
+#  name: Orte
+#  view: true
+#  entities:
+#  - camera.stephan
+#  - camera.jule
+#  - camera.jules_arbeitshandy
+#  - camera.owntracks
+#  - group.applehomekit
 automatismenszenen:
   name: Automatismen & Szenen
   view: true
