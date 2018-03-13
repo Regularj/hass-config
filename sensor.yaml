@@ -1,5 +1,14 @@
 ##################################################
 #                                                #
+#                 Discogs                        #
+#                                                #
+##################################################
+
+- platform: discogs
+  token: sPWlbMpdcbgOPBUWrUGyuoNhnkqhBpivTwXyvKdy
+
+##################################################
+#                                                #
 #                 Mondphase                      #
 #                                                #
 ##################################################
@@ -264,14 +273,14 @@
 #                                                #
 ##################################################
 
-- platform: rest
-  resource: https://pypi.python.org/pypi/homeassistant/json
-  name: aktuelle Version
-  value_template: '{{ value_json.info.version }}'
-  scan_interval: 3600
-- platform: command_line
-  name: "installierte Version"
-  command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+#- platform: rest
+#  resource: https://pypi.python.org/pypi/homeassistant/json
+#  name: aktuelle Version
+#  value_template: '{{ value_json.info.version }}'
+#  scan_interval: 3600
+#- platform: command_line
+#  name: "installierte Version"
+#  command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
 
 
 #################################################
@@ -343,3 +352,31 @@
                       {%- else -%}
                           mdi:thumb-down-outline
                       {%- endif -%}'
+
+#
+#
+#
+#
+#
+
+- platform: luftdaten
+  sensorid: 3706
+  monitored_conditions:
+    - P1
+    - P1
+- platform: luftdaten
+  sensorid: 3707
+  monitored_conditions:
+    - temperature
+    - humidity
+
+
+##############################################
+#                                            #
+#            DWD-Wetterwarnungen             #
+#                                            #
+##############################################
+
+
+- platform: dwd_weather_warnings
+  region_name: Nienhagen&lk=Kreis%20Rostock%20-%20Küste

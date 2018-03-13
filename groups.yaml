@@ -1,4 +1,5 @@
 default_view:
+  name: Management Summary
   view: true
   entities:
   - group.alerts
@@ -8,8 +9,14 @@ default_view:
   - group.wetterzsfg
   - group.luftfeuchtigkeiten
   - group.raumtemperaturen
+  - group.heizung
   - group.fenstertuer
   - group.familie
+  - sensor.discogs
+heizung:
+  name: Heizungen
+  entities:
+  - climate.wohnzimmerfenster
 weltall:
   name: Weltall
   entities:
@@ -71,8 +78,8 @@ familie:
   name: Familie
   entities:
   - device_tracker.stephan
-  - device_tracker.jule
-  - device_tracker.ping
+  - input_boolean.stephanishome
+  - device_tracker.androide3c5daf46596c063home
 wetterzsfg:
   name: Wetter
   entities:
@@ -129,11 +136,11 @@ hintergrundtechnik:
   - group.akku
   - group.hasspi
   - group.switches
-anwesenheiten:
-  name: Anwesenheitskontrolle
+  - group.grouped_lights
+grouped_lights:
+  name: Grouped Lights
   entities:
-  - device_tracker.stephan
-  - device_tracker.jule
+  - light.grouped_lights
 szenen:
   name: Szenen
   entities:
@@ -162,6 +169,7 @@ wohnzimmer:
   - sensor.humidity_158d00011172f3
   - sensor.temperature_158d00011172f3
   - binary_sensor.door_window_sensor_158d000153b0e1
+  - climate.wohnzimmerfenster
 flur:
   name: Flur
   entities:
@@ -185,6 +193,8 @@ wetterdetails:
   name: Aussenwelt
   view: true
   entities:
+  - sensor.dwdweatherwarnings_advance_warning_level
+  - sensor.dwdweatherwarnings_current_warning_level
   - group.wetterjetzt
   - group.wettervorhersage
   - group.wind
@@ -207,10 +217,12 @@ wind:
   - sensor.dark_sky_wind_speed
   - sensor.dark_sky_wind_bearing
   - sensor.dark_sky_pressure
+  - sensor.luftdaten_sensor_pm10
 temperaturen:
   name: Temperaturen
   entities:
   - sensor.dark_sky_temperature
+  - sensor.luftdaten_sensor_temperature
   - sensor.dark_sky_temperature_max
   - sensor.dark_sky_temperature_min
   - sensor.dark_sky_apparent_temperature
@@ -219,6 +231,7 @@ niederschlag:
   name: Niederschlag
   entities:
   - sensor.dark_sky_humidity
+  - sensor.luftdaten_sensor_humidity
   - sensor.dark_sky_precip_type
   - sensor.dark_sky_precip_intensity
   - sensor.dark_sky_precip_probability
@@ -247,11 +260,12 @@ automatismenlicht:
   - automation.media_player_pausedstopped
   - automation.balkon_offen
   - automation.balkon_geschlossen
-  - automation.nachtlicht_bei_bewegung
-  - automation.nachtlicht_aus
   - automation.fluxer_start
   - automation.lichter_bei_abwesenheit_aus
   - automation.lichter_vergessen
+  - automation.nachtlicht_bei_bewegung
+  - automation.nachtlicht_aus
+  - automation.lichtwecker_schlafzimmer
 automatismensystem:
   name: Systemautomatismen
   entities:
@@ -267,3 +281,5 @@ automatismenstrom:
   - automation.radio_an_wochentags
   - automation.radio_aus_wochentags
   - automation.radio_an_wochenende
+  - automation.heizung_an_wohnzimmerfenster
+  - automation.heizung_aus_wohnzimmerfenster

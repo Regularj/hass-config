@@ -116,3 +116,11 @@
   switch.speisesaal_radio:
     friendly_name: Küchenradio
     icon: mdi:radio
+  climate.wohnzimmerfenster:
+    friendly_name: Wohnzimmer (Fenster)
+  sensor.luftdaten_sensor_temperature:
+    friendly_name: Temperatur (LD)
+  sensor.luftdaten_sensor_humidity:
+    friendly_name: Luftfeuchte (LD)
+  sensor.luftdaten_sensor_pm10:
+    friendly_name: Luftqualität (LD)

@@ -35,8 +35,8 @@ http:
 updater:
 
 # Discover some devices automatically
-discovery:
- ignore:
+discovery: 
+  ignore:
     - philips_hue
 
 # Allows you to issue voice commands from the frontend in enabled browsers
@@ -52,7 +52,8 @@ logger:
 
 # Alte Events, States löschen
 recorder:
-  purge_interval: 5
+  purge_interval: 1
+  purge_keep_days: 5
 
 # Track the sun
 sun:
@@ -69,13 +70,19 @@ group: !include groups.yaml
 light:
   - platform: limitlessled
     bridges: 
-    - host: 192.168.0.156
-      version: 6
-      port: 5987
-      groups:
-      - number: 1
-        type: white
-        name: Bettlicht
+      - host: 192.168.0.156
+        port: 5987
+        groups:
+        - number: 1
+          type: white
+          name: Bettlicht
+  - platform: grouped_light
+    name: "Grouped Lights"
+    entities:
+      - light.wohnzimmer_licht
+      - light.romy_licht
+      - light.bad_licht
+      - light.speisesaal_licht
   - platform: yeelight
     devices:
       192.168.0.80:
@@ -106,7 +113,6 @@ switch:
       - light.wohnzimmer_licht
       - light.bad_licht
       - light.speisesaal_licht
-      - light.romy_licht
     name: Fluxer
     start_time: '5:45'
     stop_time: '5:30'
@@ -179,6 +185,7 @@ telegram_bot:
   allowed_chat_ids:
     - 19976847
     - -204074268
+    - 65671155
 
 ##
 ## Xiaomi Gateway
@@ -191,19 +198,15 @@ xiaomi_aqara:
 
 device_tracker:
   - platform: nmap_tracker
-    hosts: 192.168.0.1/24
+    hosts: 192.168.0.0/24
     consider_home: 1800
-    home_interval: 5
-    scan_options: " --privileged -sP "
-    track_new_devices: yes
-#  - platform: ping
-#    hosts:
-#      stephan: 192.168.0.198
-#      jule: 192.168.0.39
+    home_interval: 10
+    track_new_devices: no
+#  - platform: bluetooth_le_tracker
 
-mqtt:
-  broker: 95.143.172.207
-  port: 62977
+#mqtt:
+#  broker: 95.143.172.207
+#  port: 62977
 
 alert:
   romy_feuchtigkeit:
@@ -378,3 +381,15 @@ input_boolean:
     name: Home
 
 shopping_list:
+
+###############################################
+#                                             #
+#         Bluetooth Heizungstherostate        #
+#                                             #
+###############################################
+
+climate:
+  - platform: eq3btsmart
+    devices:
+      wohnzimmerfenster:
+        mac: '00:1A:22:0D:7A:38'

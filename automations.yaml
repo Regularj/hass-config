@@ -7,13 +7,10 @@
 - id: allewegaberlichteran
   alias: "Lichter vergessen"
   trigger:
-    platform: state
-    entity_id: group.familie
-    to: 'not_home'
-    for:
-      hours: 0
-      minutes: 15
-      seconds: 0
+    platform: zone
+    entity_id: device_tracker.stephansiphone
+    zone: zone.home
+    event: leave
   condition:
     condition: or
     conditions:
@@ -117,6 +114,39 @@
   action:
     - service: light.turn_on
       entity_id: light.wohnzimmer_licht
+
+#########################################################################
+#                                                                       #
+#                    Heizungen aus                                      #
+#                                                                       #
+#########################################################################
+
+
+- id: heizungaus_wohnzimmerfenster
+  alias: "Heizung aus Wohnzimmerfenster"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
+      from: 'off'
+      to: 'on'
+  action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.wohnzimmerfenster
+        operation_mode: 'off'
+
+- id: heizungan_wohnzimmerfenster
+  alias: "Heizung an Wohnzimmerfenster"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
+      from: 'on'
+      to: 'off'
+  action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.wohnzimmerfenster
+        operation_mode: 'auto'
 
 #########################################################################
 #                                                                       #
@@ -301,3 +331,19 @@
     - service: shell_command.radiokuecheaus
     - service: shell_command.radiobadaus
 
+#######################################################
+#                                                     #
+#             Lichtwecker Schlafzimmer                #
+#                                                     #
+#######################################################
+
+- id: Lichtwecker
+  alias: "Lichtwecker Schlafzimmer"
+  trigger:
+    platform: time
+    at: "06:30:00"
+  action:
+    service: light.turn_on
+    entity_id: light.bettlicht
+    data:
+      transition: 900
