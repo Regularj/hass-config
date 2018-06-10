@@ -76,31 +76,24 @@ light:
         - number: 1
           type: white
           name: Bettlicht
-  - platform: grouped_light
-    name: "Grouped Lights"
-    entities:
-      - light.wohnzimmer_licht
-      - light.romy_licht
-      - light.bad_licht
-      - light.speisesaal_licht
   - platform: yeelight
     devices:
-      192.168.0.80:
+      192.168.0.81:
         name: Wohnzimmer Licht
         transition: 350 
         use_music_mode: False
         save_on_change: True
-      192.168.0.124:
+      192.168.0.125: # stimmt das?
         name: Romy Licht
         transition: 350
         use_music_mode: False
         save_on_change: True
-      192.168.0.148:
+      192.168.0.149:
         name: Bad Licht
         transition: 350
         use_music_mode: False
         save_on_change: True
-      192.168.0.109:
+      192.168.0.110:
         name: Speisesaal Licht
         transition: 350
         use_music_mode: False
@@ -121,10 +114,10 @@ switch:
     stop_colortemp: 3400
     disable_brightness_adjust: True
     mode: mired
-  - platform: xiaomiplug
-    host: 192.168.0.81
-    name: Kaffeemaschine
-    token: 8735e7bd8f10b45ea6708ba89c1a4f7b
+#  - platform: xiaomiplug
+#    host: 192.168.0.81
+#    name: Kaffeemaschine
+#    token: 8735e7bd8f10b45ea6708ba89c1a4f7b
   - platform: command_line
     switches:
       speisesaal_radio:
@@ -384,7 +377,7 @@ shopping_list:
 
 ###############################################
 #                                             #
-#         Bluetooth Heizungstherostate        #
+#         Bluetooth Heizungsthermostate       #
 #                                             #
 ###############################################
 
@@ -393,3 +386,7 @@ climate:
     devices:
       wohnzimmerfenster:
         mac: '00:1A:22:0D:7A:38'
+
+
+homekit:
+  auto_start: False

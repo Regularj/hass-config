@@ -347,3 +347,18 @@
     entity_id: light.bettlicht
     data:
       transition: 900
+
+#######################################################
+#                                                     #
+#      HomeKit mit 5 Minuten Delay starten            #
+#                                                     #
+#######################################################
+
+- id: Homekitstart
+  alias: "HomeKit Start"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - delay: 00:05
+    - service: homekit.start

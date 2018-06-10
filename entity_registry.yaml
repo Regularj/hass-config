@@ -1,42 +1,64 @@
 sensor.stephans_iphone_battery_level:
+  name:
   platform: ios
   unique_id: level_stephansiphone
 sensor.stephans_iphone_battery_state:
+  name:
   platform: ios
   unique_id: state_stephansiphone
 binary_sensor.door_window_sensor_158d000153b0e1:
+  name:
   platform: xiaomi_aqara
   unique_id: status158d000153b0e1
 binary_sensor.motion_sensor_158d00010f859c:
+  name:
   platform: xiaomi_aqara
   unique_id: status158d00010f859c
 sensor.temperature_158d0001100456:
+  name:
   platform: xiaomi_aqara
   unique_id: temperature158d0001100456
 sensor.illumination_f0b429cc315f:
+  name:
   platform: xiaomi_aqara
   unique_id: illuminationf0b429cc315f
 sensor.temperature_158d00012914cb:
+  name:
   platform: xiaomi_aqara
   unique_id: temperature158d00012914cb
 sensor.temperature_158d00012bf206:
+  name:
   platform: xiaomi_aqara
   unique_id: temperature158d00012bf206
 sensor.humidity_158d00012bf206:
+  name:
   platform: xiaomi_aqara
   unique_id: humidity158d00012bf206
 sensor.humidity_158d00011172f3:
+  name:
   platform: xiaomi_aqara
   unique_id: humidity158d00011172f3
 sensor.humidity_158d00012914cb:
+  name:
   platform: xiaomi_aqara
   unique_id: humidity158d00012914cb
 sensor.temperature_158d00011172f3:
+  name:
   platform: xiaomi_aqara
   unique_id: temperature158d00011172f3
 sensor.humidity_158d0001100456:
+  name:
   platform: xiaomi_aqara
   unique_id: humidity158d0001100456
 light.gateway_light_f0b429cc315f:
+  name:
   platform: xiaomi_aqara
   unique_id: rgbf0b429cc315f
+sensor.stephans_iphone_battery_state_2:
+  name:
+  platform: ios
+  unique_id: state_stephans_iphone
+sensor.stephans_iphone_battery_level_2:
+  name:
+  platform: ios
+  unique_id: level_stephans_iphone
