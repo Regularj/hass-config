@@ -78,6 +78,7 @@ familie:
   name: Familie
   entities:
   - device_tracker.stephan
+  - device_tracker.icloud
   - input_boolean.stephanishome
   - device_tracker.androide3c5daf46596c063home
 wetterzsfg:
