@@ -1,0 +1,306 @@
+
+yeelinklightcolor1_miio56237443home:
+  hide_if_away: false
+  icon:
+  mac: 34:CE:00:80:40:24
+  name: yeelink-light-color1 miio56237443.home
+  picture:
+  track: false
+  vendor: XIAOMI Electronics,CO.,LTD
+
+lumigatewayv3_miio47390548home:
+  hide_if_away: false
+  icon:
+  mac: F0:B4:29:CC:31:5F
+  name: lumi-gateway-v3 miio47390548.home
+  picture:
+  track: false
+  vendor: Xiaomi Communications Co Ltd
+
+compalhubhome:
+  hide_if_away: false
+  icon:
+  mac: 5C:35:3B:B4:5B:DA
+  name: compalhub.home
+  picture:
+  track: false
+  vendor: Compal Broadband Networks, Inc.
+
+chuangmiplugm1_miio55130143home:
+  hide_if_away: false
+  icon:
+  mac: 28:6C:07:F3:38:B0
+  name: chuangmi-plug-m1 miio55130143.home
+  picture:
+  track: false
+  vendor: unknown
+
+fc8f90955e5e:
+  hide_if_away: false
+  icon:
+  mac: FC:8F:90:95:5E:5E
+  name: Küchenradio
+  picture:
+  track: false
+  vendor: unknown
+
+801f02d11329:
+  hide_if_away: false
+  icon:
+  mac: 80:1F:02:D1:13:29
+  name: 801f02d11329
+  picture:
+  track: false
+  vendor: unknown
+
+androide3c5daf46596c063home:
+  hide_if_away: false
+  icon:
+  mac: EC:10:7B:90:42:A6
+  name: android-e3c5daf46596c063.home
+  picture:
+  track: yes
+  vendor: unknown
+
+90b21fbcd3af:
+  hide_if_away: false
+  icon:
+  mac: 90:B2:1F:BC:D3:AF
+  name: 90b21fbcd3af
+  picture:
+  track: false
+  vendor: unknown
+
+801f02d11329:
+  hide_if_away: false
+  icon:
+  mac: 80:1F:02:D1:13:29
+  name: 801f02d11329
+  picture:
+  track: false
+  vendor: Edimax Technology Co. Ltd.
+
+yeelinklightcolor1_miio56239735home:
+  hide_if_away: false
+  icon:
+  mac: 34:CE:00:80:49:18
+  name: yeelink-light-color1 miio56239735.home
+  picture:
+  track: false
+  vendor: XIAOMI Electronics,CO.,LTD
+
+fc8f90955eb0:
+  hide_if_away: false
+  icon:
+  mac: FC:8F:90:95:5E:B0
+  name: fc8f90955eb0
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+yeelinklightmono1_miio53655247home:
+  hide_if_away: false
+  icon:
+  mac: 28:6C:07:AE:38:45
+  name: yeelink-light-mono1 miio53655247.home
+  picture:
+  track: false
+  vendor: XIAOMI Electronics,CO.,LTD
+
+yeelinklightcolor1_miio56240799home:
+  hide_if_away: false
+  icon:
+  mac: 34:CE:00:80:4D:40
+  name: yeelink-light-color1 miio56240799.home
+  picture:
+  track: false
+  vendor: XIAOMI Electronics,CO.,LTD
+
+androide59fade9eecf0aehome:
+  hide_if_away: false
+  icon:
+  mac: 70:5E:09:5A:2B:AA
+  name: android-e59fade9eecf0ae.home
+  picture:
+  track: yes
+  vendor: unknown
+
+neverlupushome:
+  hide_if_away: false
+  icon:
+  mac: 90:00:4E:B0:3E:94
+  name: never-lupus.home
+  picture:
+  track: false
+  vendor: Hon Hai Precision Ind. Co.,Ltd.
+
+android49f757505051eafchome:
+  hide_if_away: false
+  icon:
+  mac: CC:FD:17:39:4B:F9
+  name: android-49f757505051eafc.home
+  picture:
+  track: false
+  vendor: TCT mobile ltd
+
+android82e197067bedda3fhome:
+  hide_if_away: false
+  icon:
+  mac: F8:84:F2:A6:11:C0
+  name: android-82e197067bedda3f.home
+  picture:
+  track: false
+  vendor: Samsung Electronics Co.,Ltd
+
+f8d0aca5b8f0:
+  hide_if_away: false
+  icon:
+  mac: F8:D0:AC:A5:B8:F0
+  name: f8d0aca5b8f0
+  picture:
+  track: false
+  vendor: Sony Interactive Entertainment Inc.
+
+samsunggalaxys7home:
+  hide_if_away: false
+  icon:
+  mac: 2C:0E:3D:F5:2D:8A
+  name: Samsung-Galaxy-S7.home
+  picture:
+  track: false
+  vendor: SAMSUNG ELECTRO-MECHANICS(THAILAND)
+
+stephansiphone:
+  hide_if_away: false
+  icon:
+  mac:
+  name: stephansiphone
+  picture:
+  track: false
+  vendor:
+
+androidc3a1d367247e0015home:
+  hide_if_away: false
+  icon:
+  mac: 10:66:75:CC:14:30
+  name: android-c3a1d367247e0015.home
+  picture:
+  track: false
+  vendor: unknown
+
+bmwhome:
+  hide_if_away: false
+  icon:
+  mac: 14:2D:27:98:E3:F3
+  name: bmw.home
+  picture:
+  track: true
+  vendor: Hon Hai Precision Ind. Co.,Ltd.
+
+macbookairhome:
+  hide_if_away: false
+  icon:
+  mac: D4:61:9D:25:97:A6
+  name: MacBook-Air.home
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+honor_6xhome:
+  hide_if_away: false
+  icon:
+  mac: 04:4F:4C:87:0F:CA
+  name: Honor 6X.home
+  picture:
+  track: false
+  vendor: HUAWEI TECHNOLOGIES CO.,LTD
+
+hflpb100home:
+  hide_if_away: false
+  icon:
+  mac: F0:FE:6B:3B:E0:C6
+  name: HF-LPB100.home
+  picture:
+  track: false
+  vendor: Shanghai High-Flying Electronics Technology Co., Ltd
+
+iphonevonoliverhome:
+  hide_if_away: false
+  icon:
+  mac: F0:79:60:3B:71:00
+  name: iPhonevonOliver.home
+  picture:
+  track: false
+  vendor: Apple, Inc.
+
+fcfc48ad5bce:
+  hide_if_away: false
+  icon:
+  mac: FC:FC:48:AD:5B:CE
+  name: fcfc48ad5bce
+  picture:
+  track: false
+
+stephans_iphone:
+  hide_if_away: false
+  icon:
+  mac:
+  name: stephans iphone
+  picture:
+  track: false
+
+nostromohome:
+  hide_if_away: false
+  icon:
+  mac: 60:67:20:C2:92:D8
+  name: Nostromo.home
+  picture:
+  track: false
+
+galaxyj3home:
+  hide_if_away: false
+  icon:
+  mac: 08:78:08:06:B1:8E
+  name: Galaxy-J3.home
+  picture:
+  track: false
+
+android5542c700fed0276home:
+  hide_if_away: false
+  icon:
+  mac: 8C:BF:A6:FC:B1:77
+  name: android-5542c700fed0276.home
+  picture:
+  track: false
+
+a0722c9e827f:
+  hide_if_away: false
+  icon:
+  mac: A0:72:2C:9E:82:7F
+  name: a0722c9e827f
+  picture:
+  track: false
+
+apple_watchvonstephan:
+  hide_if_away: false
+  icon:
+  mac:
+  name: Apple Watch von Stephan
+  picture:
+  track: false
+
+stephansiphone_2:
+  hide_if_away: false
+  icon:
+  mac: BT_FC:FC:48:AD:5B:CF
+  name: StephansiPhone
+  picture:
+  track: false
+
+hostone:
+  hide_if_away: false
+  icon:
+  mac:
+  name: hostone
+  picture:
+  track: false

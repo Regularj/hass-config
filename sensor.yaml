@@ -42,9 +42,23 @@
     feiertage:
       friendly_name: 'Feiertage'
       value_template: '{{ as_timestamp(states.calendar.feiertage_in_deutschland.attributes.start_time) | timestamp_custom("Am %d.%m.",True) }} ist {{ states.calendar.feiertage_in_deutschland.attributes.message }}'
+- platform: template
+  sensors:
+    muellabfuhr:
+      friendly_name: 'Mülltermine'
+      value_template: '{{ as_timestamp(states.calendar.muellabfuhr.attributes.start_time) | timestamp_custom("Am %d.%m.",True) }} kommt die Müllabfuhr: {{ states.calendar.muellabfuhr.attributes.message }}'
 - platform: systemmonitor
   resources:
     - type: since_last_boot
+- platform: template
+  sensors:
+    tonnen_raus:
+      friendly_name: "Mülltonnen raus"
+      value_template: >
+        {% if as_timestamp(states.calendar.muellabfuhr.attributes.start_time) - as_timestamp(strptime(states.sensor.date__time.state, "%Y-%m-%d, %H:%M" ) ) < 21600 and as_timestamp(states.calendar.muellabfuhr.attributes.end_time) > as_timestamp(strptime(states.sensor.date__time.state, "%Y-%m-%d, %H:%M" ) ) %}on{% else %}off{% endif %}
+- platform: time_date
+  display_options:
+    - 'date_time'
 
 ##################################################
 #                                                #
@@ -122,15 +136,6 @@
 
 - platform: template
   sensors:
-    battery_stephansiphone:
-      unit_of_measurement: '%'
-      value_template: >-
-          {%- if states.device_tracker.stephansiphone.attributes.battery %}
-              {{ states.device_tracker.stephansiphone.attributes.battery|round }}
-          {% else %}
-              {{ states.sensor.battery_stephansiphone.state }}
-          {%- endif %}
-      icon_template: '{%- if is_state("sensor.battery_stephansiphone", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.stephansiphone", "battery_status", "Charging") %}mdi:battery-charging{%- elif  states.device_tracker.stephansiphone.attributes.battery <= 5 %}mdi:battery-outline{%- elif states.device_tracker.stephansiphone.attributes.battery >= 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.stephansiphone.attributes.battery|float / 10)|round*10}}{%- endif %}'
     battery_applewatch:
       unit_of_measurement: '%'
       value_template: >-
@@ -220,6 +225,16 @@
          mdi:battery-{{(states.binary_sensor.motion_sensor_158d00010f859c.attributes.battery_level|float / 10)|round*10}}
       {%- endif %}'
 
+#    battery_stephansiphone:
+#      unit_of_measurement: '%'
+#      value_template: >-
+#          {%- if states.device_tracker.stephans_iphone.attributes.battery %}
+#              {{ states.device_tracker.stephans_iphone.attributes.battery|round }}
+#          {% else %}
+#              {{ states.sensor.stephans_iphone_battery_level_2.state }}
+#          {%- endif %}
+#      icon_template: '{%- if is_state("sensor.stephans_iphone_battery_level_2", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.stephans_iphone", "battery_status", "Charging") %}mdi:battery-charging{%- elif  states.device_tracker.stephans_iphone.attributes.battery <= 5 %}mdi:battery-outline{%- elif states.device_tracker.stephans_iphone.attributes.battery >= 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.stephans_iphone.attributes.battery|float / 10)|round*10}}{%- endif %}'
+
 ##################################################
 #                                                #
 #                Sonarr                          #
@@ -273,15 +288,20 @@
 #                                                #
 ##################################################
 
-#- platform: rest
-#  resource: https://pypi.python.org/pypi/homeassistant/json
-#  name: aktuelle Version
-#  value_template: '{{ value_json.info.version }}'
-#  scan_interval: 3600
-#- platform: command_line
-#  name: "installierte Version"
-#  command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+#https://home-assistant.io/components/sensor.command_line/
+  
+-  platform: command_line
+   name: HASS Installed version
+   command: "head -5 /home/homeassistant/.homeassistant/.HA_VERSION"
 
+#https://www.home-assistant.io/components/sensor.rest/
+  
+- platform: rest
+  resource: https://pypi.python.org/pypi/homeassistant/json
+  name: HASS Latest Version
+  value_template: "{{ value_json.info.version }}"
+  scan_interval: 3600
+    
 
 #################################################
 #                                               #

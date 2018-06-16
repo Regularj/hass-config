@@ -28,8 +28,8 @@
   sensor.humidity_158d00012914cb:
     icon: mdi:water-percent
     friendly_name: Schlafzimmer Feuchtigkeit
-  sensor.battery_stephansiphone:
-    friendly_name: Stephans iPhone 5S
+  sensor.stephans_iphone_battery_level_2:
+    friendly_name: Stephans iPhone 6S Plus
   sensor.battery_applewatch:
     friendly_name: Stephans Apple Watch 2
   sensor.yr_symbol:
@@ -43,8 +43,8 @@
     icon: mdi:cake-variant
   sensor.feiertage:
     icon: mdi:calendar
-  sensor.friends_geburtstage:
-    icon: mdi:cake-variant
+  sensor.muellabfuhr:
+    icon: mdi:delete-empty
   sensor.since_last_boot_templated:
     friendly_name: Uptime
     icon: mdi:clock-start
@@ -99,7 +99,7 @@
   device_tracker.androidf0f89b5be25f73echome:
     friendly_name: Jules Arbeitshandy
     icon: mdi:cellphone-android
-  device_tracker.stephansiphone:
+  device_tracker.stephans_iphone:
     friendly_name: Stephan
     icon: mdi:cellphone-iphone
   binary_sensor.motion_sensor_158d00010f859c:
@@ -124,3 +124,12 @@
     friendly_name: Luftfeuchte (LD)
   sensor.luftdaten_sensor_pm10:
     friendly_name: Luftqualität (LD)
+  sensor.hass_installed_version:
+    friendly_name: Installierte HASS-Version
+    icon: mdi:folder-download
+  sensor.hass_latest_version:
+    friendly_name: Verfügbare HASS-Version
+    icon: mdi:github-circle
+  device_tracker.galaxyj52016home:
+    friendly_name: Jule
+    icon: mdi:cellphone-android

@@ -57,3 +57,9 @@
   - device_id: geburtstagskalender
     name: Geburtstagskalender
     track: true
+
+- cal_id: c6snv4miavtjb6jp2f325lc50g@group.calendar.google.com
+  entities:
+  - device_id: muellabfuhr
+    name: Müllabfuhr
+    track: true

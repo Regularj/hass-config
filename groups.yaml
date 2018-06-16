@@ -12,7 +12,7 @@ default_view:
   - group.heizung
   - group.fenstertuer
   - group.familie
-  - sensor.discogs
+  - updater.updater
 heizung:
   name: Heizungen
   entities:
@@ -74,13 +74,14 @@ kalender:
   - sensor.privat
   - sensor.geburtstagskalender
   - sensor.feiertage
+  - sensor.muellabfuhr
 familie:
   name: Familie
   entities:
-  - device_tracker.stephan
-  - device_tracker.icloud
-  - input_boolean.stephanishome
-  - device_tracker.androide3c5daf46596c063home
+ # - device_tracker.stephan
+  - device_tracker.stephans_iphone
+ # - input_boolean.stephanishome
+  - device_tracker.galaxyj52016home
 wetterzsfg:
   name: Wetter
   entities:
@@ -99,7 +100,7 @@ media:
 akku:
   name: "Akkustände"
   entities:
-  - sensor.battery_stephansiphone
+  - sensor.stephans_iphone_battery_level_2
   - sensor.battery_applewatch
   - sensor.battery_hygro_wohnzimmer
   - sensor.battery_hygro_romy
@@ -112,6 +113,8 @@ hasspi:
   entities:
   - sensor.since_last_boot_templated
   - sensor.xiaomiplug_update
+  - sensor.hass_installed_version
+  - sensor.hass_latest_version
 nzbget:
   name: NZBGet
   entities:
