@@ -60,11 +60,11 @@
   action:
   - service: notify.telegram_haushalt
     data_template:
-      message: 'Morgen kommt die Müllabfuhr: {{ states.calendar.muellabfuhr.attributes.message }}'
+      message: 'Morgen kommt die Müllabfuhr: {{ states.calendar.muellabfuhr.attributes.message }}. Soll ich euch nochmal erinnern?'
       data:
           inline_keyboard:
-          - '30 Minuten:/30m, 1 Stunde:/1h, 3 Stunden:/3h'
-          - 'Ist erledigt:/removekeyboard'
+          - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunden:/3h'
+          - 'Ist erledigt. Die Mülltonnen sind rausgestellt:/removekeyboard'
 
 - id: 'telegramremoveinline'
   alias: 'Telegram callback to remove keyboard'
@@ -109,8 +109,8 @@
       message: '{{ trigger.event.data.message.text }}'
       data:
         inline_keyboard:
-          - '30 Minuten:/30m, 1 Stunde:/1h, 3 Stunden:/3h'
-          - 'Ist erledigt:/removekeyboard'
+          - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunden:/3h'
+          - 'Ist erledigt, Mülltonnen sind rausgestellt:/removekeyboard'
 
 - id: 'telegramrepeat1h'
   alias: 'Telegram callback to repeat message in 1 hour'
@@ -136,8 +136,8 @@
       message: '{{ trigger.event.data.message.text }}'
       data:
         inline_keyboard:
-          - '30 Minuten:/30m, 1 Stunde:/1h, 3 Stunde:/3h'
-          - 'Ist erledigt:/removekeyboard'
+          - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunde:/3h'
+          - 'Ist erledigt, Mülltonnen sind rausgestellt:/removekeyboard'
 
 - id: 'telegramrepeat3h'
   alias: 'Telegram callback to repeat message in 3 hour'
@@ -163,8 +163,8 @@
       message: '{{ trigger.event.data.message.text }}'
       data:
         inline_keyboard:
-          - '30 Minuten:/30m, 1 Stunde:/1h, 3 Stunde:/3h'
-          - 'Ist erledigt:/removekeyboard'
+          - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunden:/3h'
+          - 'Ist erledigt, Mülltonnen sind rausgestellt:/removekeyboard'
           
 ############################################################################
 #                                                                          #
