@@ -274,8 +274,9 @@ automatismensystem:
   name: Systemautomatismen
   entities:
   - automation.update_benachrichtigungen
-  - automation.keine_alarme
-  - automation.alarme_neustart
+  - automation.telegram_erinnerung_an_muelltonnen
+  - automation.telegram_callback_to_remove_keyboard
+  - automation.telegramremoveinline
 automatismenstrom:
   name: Strom
   entities:
