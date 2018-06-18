@@ -110,7 +110,7 @@
       data:
         inline_keyboard:
           - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunden:/3h'
-          - 'Ist erledigt, Mülltonnen sind rausgestellt:/removekeyboard'
+          - 'Ist erledigt. Die Mülltonnen sind rausgestellt:/removekeyboard'
 
 - id: 'telegramrepeat1h'
   alias: 'Telegram callback to repeat message in 1 hour'
@@ -137,7 +137,7 @@
       data:
         inline_keyboard:
           - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunde:/3h'
-          - 'Ist erledigt, Mülltonnen sind rausgestellt:/removekeyboard'
+          - 'Ist erledigt. Die Mülltonnen sind rausgestellt:/removekeyboard'
 
 - id: 'telegramrepeat3h'
   alias: 'Telegram callback to repeat message in 3 hour'
@@ -164,7 +164,7 @@
       data:
         inline_keyboard:
           - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunden:/3h'
-          - 'Ist erledigt, Mülltonnen sind rausgestellt:/removekeyboard'
+          - 'Ist erledigt. Die Mülltonnen sind rausgestellt:/removekeyboard'
           
 ############################################################################
 #                                                                          #

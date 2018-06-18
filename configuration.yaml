@@ -78,22 +78,22 @@ light:
           name: Bettlicht
   - platform: yeelight
     devices:
-      192.168.0.81:
+      192.168.1.155:
         name: Wohnzimmer Licht
         transition: 350 
         use_music_mode: False
         save_on_change: True
-      192.168.0.125: # stimmt das?
+      192.168.0.125:
         name: Romy Licht
         transition: 350
         use_music_mode: False
         save_on_change: True
-      192.168.0.149:
+      192.168.1.248:
         name: Bad Licht
         transition: 350
         use_music_mode: False
         save_on_change: True
-      192.168.0.110:
+      192.168.1.243:
         name: Speisesaal Licht
         transition: 350
         use_music_mode: False
@@ -117,11 +117,11 @@ switch:
   - platform: command_line
     switches:
       speisesaal_radio:
-        command_on: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.91 fav1"
-        command_off: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.91 stop"
+        command_on: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.242 fav1"
+        command_off: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.242 stop"
       bad_radio:
-        command_on: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.28 fav1"
-        command_off: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.28 stop"
+        command_on: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.53 fav1"
+        command_off: "/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.53 stop"
 #  - platform: xiaomiplug
 #    host: 192.168.0.81
 #    name: Kaffeemaschine
@@ -129,12 +129,12 @@ switch:
 
 media_player:
   - platform: kodi
-    host: 192.168.0.157
+    host: 192.168.1.112
     name: Kodi
     port: 80
     enable_websocket: false
   - platform: itunes
-    host: 192.168.0.169
+    host: 192.168.1.122
 
 scene:
   - name: Wohnzimmer normal
@@ -191,7 +191,7 @@ xiaomi_aqara:
 
 device_tracker:
   - platform: nmap_tracker
-    hosts: 192.168.0.40
+    hosts: 192.168.1.7
     consider_home: 1800
     home_interval: 10
     scan_options: " -Pn --host-timeout 5s "
@@ -333,7 +333,7 @@ zone 2:
 panel_iframe:
   kodi:
     title: 'Kodi'
-    url: 'http://192.168.0.157:80'
+    url: 'http://192.168.1.239:80'
     icon: mdi:kodi
 
 camera:
@@ -362,10 +362,10 @@ camera:
 #    limit_refetch_to_url_change: true
 
 shell_command:
-  radiokueche: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.91 fav1'
-  radiobad: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.28 fav1'
-  radiokuecheaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.91 stop'
-  radiobadaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.0.28 stop'
+  radiokueche: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.242 fav1'
+  radiobad: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.53 fav1'
+  radiokuecheaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.242 stop'
+  radiobadaus: '/home/homeassistant/.homeassistant/GitHub-Komponenten/Samsung-Multiroom/MultiRoom.sh 192.168.1.53 stop'
 
 input_boolean:
   stephanishome:
