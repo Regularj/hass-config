@@ -277,6 +277,7 @@ automatismensystem:
   - automation.telegram_erinnerung_an_muelltonnen
   - automation.telegram_callback_to_remove_keyboard
   - automation.telegramremoveinline
+  - automation.telegram_erinnerung_an_geburtstage
 automatismenstrom:
   name: Strom
   entities:

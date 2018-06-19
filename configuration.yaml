@@ -20,7 +20,7 @@ homeassistant:
 #introduction:
 
 # Enables the frontend
-frontend:
+frontend: !include frontend.yaml
 
 # Enables configuration UI
 config:
@@ -191,7 +191,7 @@ xiaomi_aqara:
 
 device_tracker:
   - platform: nmap_tracker
-    hosts: 192.168.1.7
+    hosts: 192.168.1.71
     consider_home: 1800
     home_interval: 10
     scan_options: " -Pn --host-timeout 5s "

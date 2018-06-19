@@ -165,7 +165,25 @@
         inline_keyboard:
           - 'In 30 Minuten:/30m, In 1 Stunde:/1h, In 3 Stunden:/3h'
           - 'Ist erledigt. Die Mülltonnen sind rausgestellt:/removekeyboard'
-          
+
+############################################################################
+#                                                                          #
+#                  Automation für Erinnerung Geburtstag                    #
+#                                                                          #
+############################################################################
+
+- id: 'telegramgeburtstage'
+  alias: 'Telegram Erinnerung an Geburtstage'
+  trigger:
+  - entity_id: sensor.telegram_geburtstage
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.telegram_haushalt
+    data_template:
+      message: 'Heute hat {{ states.calendar.geburtstagskalender.attributes.message }} Geburtstag!'
+
 ############################################################################
 #                                                                          #
 # Media-Player Automatismen (Licht aus, wenn Film läuft)                   #

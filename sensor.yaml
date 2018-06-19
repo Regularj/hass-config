@@ -56,6 +56,12 @@
       friendly_name: "Mülltonnen raus"
       value_template: >
         {% if as_timestamp(states.calendar.muellabfuhr.attributes.start_time) - as_timestamp(strptime(states.sensor.date__time.state, "%Y-%m-%d, %H:%M" ) ) < 21600 and as_timestamp(states.calendar.muellabfuhr.attributes.end_time) > as_timestamp(strptime(states.sensor.date__time.state, "%Y-%m-%d, %H:%M" ) ) %}on{% else %}off{% endif %}
+- platform: template
+  sensors:
+    telegram_geburtstage:
+      friendly_name: "Geburtstagserinnerungen"
+      value_template: >
+        {% if as_timestamp(states.calendar.geburtstagskalender.attributes.start_time) - as_timestamp(strptime(states.sensor.date__time.state, "%Y-%m-%d, %H:%M" ) ) > 32400 and as_timestamp(states.calendar.geburtstagskalender.attributes.end_time) > as_timestamp(strptime(states.sensor.date__time.state, "%Y-%m-%d, %H:%M" ) ) %}on{% else %}off{% endif %}
 - platform: time_date
   display_options:
     - 'date_time'
