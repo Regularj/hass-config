@@ -182,7 +182,7 @@
   action:
   - service: notify.telegram_haushalt
     data_template:
-      message: 'Heute hat {{ states.calendar.geburtstagskalender.attributes.message }} Geburtstag!'
+      message: 'Heute hat {{ states.calendar.geburtstagskalender.attributes.message }} Geburtstag.'
 
 ############################################################################
 #                                                                          #
@@ -222,38 +222,38 @@
 
 ##########################################################################
 #                                                                        #
-# Wohnzimmerlicht aus, wenn Balkontür auf ist                            #
+# Wohnzimmerlicht aus, wenn Balkontür auf ist                           # auskommentiert, da Sensor jetzt im Bad
 #                                                                        #
 ##########################################################################
 
-- id: balkonoffen
-  alias: "Balkon offen"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
-      to: 'on'
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-      - condition: state
-        entity_id: sensor.dark_sky_precip_intensity
-        state: 'rain'
-  action:
-    - service: light.turn_off
-      entity_id: light.wohnzimmer_licht
-- id: balkonzu
-  alias: "Balkon geschlossen"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
-      from: 'on'
-      to: 'off'
-  action:
-    - service: light.turn_on
-      entity_id: light.wohnzimmer_licht
+#- id: balkonoffen
+#  alias: "Balkon offen"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
+#      to: 'on'
+#  condition:
+#    condition: or
+#    conditions:
+#      - condition: state
+#        entity_id: sun.sun
+#        state: 'below_horizon'
+#      - condition: state
+#        entity_id: sensor.dark_sky_precip_intensity
+#        state: 'rain'
+#  action:
+#    - service: light.turn_off
+#      entity_id: light.wohnzimmer_licht
+#- id: balkonzu
+#  alias: "Balkon geschlossen"
+#  trigger:
+#    - platform: state
+#      entity_id: binary_sensor.door_window_sensor_158d000153b0e1
+#      from: 'on'
+#      to: 'off'
+#  action:
+#    - service: light.turn_on
+#      entity_id: light.wohnzimmer_licht
 
 #########################################################################
 #                                                                       #
@@ -262,8 +262,8 @@
 #########################################################################
 
 
-- id: heizungaus_wohnzimmerfenster
-  alias: "Heizung aus Wohnzimmerfenster"
+- id: heizungaus_bad
+  alias: "Heizung aus im Bad"
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d000153b0e1
@@ -272,11 +272,11 @@
   action:
     - service: climate.set_operation_mode
       data:
-        entity_id: climate.wohnzimmerfenster
+        entity_id: climate.bad
         operation_mode: 'off'
 
-- id: heizungan_wohnzimmerfenster
-  alias: "Heizung an Wohnzimmerfenster"
+- id: heizungan_bad
+  alias: "Heizung an im Bad"
   trigger:
     - platform: state
       entity_id: binary_sensor.door_window_sensor_158d000153b0e1

@@ -35,7 +35,7 @@ sensor.battery_applewatch:
 sensor.yr_symbol:
   friendly_name: Wettersymbol
 binary_sensor.door_window_sensor_158d000153b0e1:
-  friendly_name: Balkontür
+  friendly_name: Badfenster
   icon: mdi:glassdoor
 sensor.privat:
   icon: mdi:calendar
@@ -111,8 +111,8 @@ switch.bad_radio:
 switch.speisesaal_radio:
   friendly_name: Küchenradio
   icon: mdi:radio
-climate.wohnzimmerfenster:
-  friendly_name: Wohnzimmer (Fenster)
+climate.bad:
+  friendly_name: Badheizung
 sensor.luftdaten_sensor_temperature:
   friendly_name: Temperatur (LD)
 sensor.luftdaten_sensor_humidity:
@@ -128,4 +128,3 @@ sensor.hass_latest_version:
 device_tracker.galaxyj52016home:
   friendly_name: Jule
   icon: mdi:cellphone-android
-automation.telegram_callback_to_remove_keyboard: {}

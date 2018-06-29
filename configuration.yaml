@@ -35,7 +35,7 @@ http:
 updater:
 
 # Discover some devices automatically
-discovery: 
+discovery:
   ignore:
     - philips_hue
 
@@ -58,7 +58,7 @@ recorder:
 # Track the sun
 sun:
 
-# Sensoren 
+# Sensoren
 sensor: !include sensor.yaml
 
 # Gruppen/Tabs
@@ -69,7 +69,7 @@ group: !include groups.yaml
 
 light:
   - platform: limitlessled
-    bridges: 
+    bridges:
       - host: 192.168.0.156
         port: 5987
         groups:
@@ -80,7 +80,7 @@ light:
     devices:
       192.168.1.155:
         name: Wohnzimmer Licht
-        transition: 350 
+        transition: 350
         use_music_mode: False
         save_on_change: True
       192.168.0.125:
@@ -144,7 +144,7 @@ scene:
             transition: 2
             brightness: 250
             xy_color: [ 0.4448, 0.4066 ]
-        
+
   - name: Wohnzimmer dimmen
     entities:
         light.wohnzimmer_licht:
@@ -200,7 +200,7 @@ device_tracker:
 #    username: regularj@pictor.uberspace.de
 #    password: !secret icloud
 #    account_name: Stephans iPhone
-  
+
 
 #mqtt:
 #  broker: 95.143.172.207
@@ -284,7 +284,7 @@ binary_sensor:
         friendly_name: 'Bad Luftfeuchte'
   - platform: template
     sensors:
-      schlafzimmer_feucht: 
+      schlafzimmer_feucht:
         value_template: '{{ states.sensor.humidity_158d00012914cb.state | int > 60 and is_state("group.familie", "home") and is_state("sun.sun", "above_horizon") and states.sensor.humidity_158d00012914cb.state | int > states.sensor.dark_sky_humidity.state | int }}'
         friendly_name: 'Schlafzimmer Luftfeuchte'
   - platform: template
@@ -315,14 +315,14 @@ tts:
     language: 'de'
 
 google:
-  client_id: 44558772016-ni3uiijas046ihu81vdsecor4q7ofb9d.apps.googleusercontent.com 
+  client_id: 44558772016-ni3uiijas046ihu81vdsecor4q7ofb9d.apps.googleusercontent.com
   client_secret: m7vYHKNj4ZfpN5z8HckouJ-O
 
 zone:
   name: Stephans Arbeit
   latitude: 54.1478358
   longitude: 11.892381
-  icon: mdi:calendar-multiple 
+  icon: mdi:calendar-multiple
 
 zone 2:
   name: Jules Arbeit
@@ -383,7 +383,7 @@ shopping_list:
 climate:
   - platform: eq3btsmart
     devices:
-      wohnzimmerfenster:
+      bad:
         mac: '00:1A:22:0D:7A:38'
 
 

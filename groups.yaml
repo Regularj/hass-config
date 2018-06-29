@@ -16,7 +16,7 @@ default_view:
 heizung:
   name: Heizungen
   entities:
-  - climate.wohnzimmerfenster
+  - climate.bad
 weltall:
   name: Weltall
   entities:
@@ -107,7 +107,7 @@ akku:
   - sensor.battery_bewegungsmelder
   - sensor.battery_hygro_bad
   - sensor.battery_hygro_schlafzimmer
-  - sensor.battery_balkon
+  - sensor.battery_badfenster
 hasspi:
   name: HomeAssistant
   entities:
@@ -173,7 +173,6 @@ wohnzimmer:
   - sensor.humidity_158d00011172f3
   - sensor.temperature_158d00011172f3
   - binary_sensor.door_window_sensor_158d000153b0e1
-  - climate.wohnzimmerfenster
 flur:
   name: Flur
   entities:
@@ -187,6 +186,7 @@ bad:
   - sensor.humidity_158d00012bf206
   - sensor.temperature_158d00012bf206
   - switch.bad_radio
+  - climate.bad
 schlafzimmer:
   name: Schlafzimmer
   entities:
@@ -287,5 +287,5 @@ automatismenstrom:
   - automation.radio_an_wochentags
   - automation.radio_aus_wochentags
   - automation.radio_an_wochenende
-  - automation.heizung_an_wohnzimmerfenster
-  - automation.heizung_aus_wohnzimmerfenster
+  - automation.heizung_an_im_bad
+  - automation.heizung_aus_im_bad

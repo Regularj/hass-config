@@ -1,0 +1,136 @@
+name: Ostseebad Nienhagen
+views:
+    # The name of a view will be used as tab title.
+    # Might be used for other things in the future.
+  - name: Management Summary
+    # Each view can have a different theme applied. Theme should be defined in the frontend.
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+        # The entities card will take a list of entities and show their state.
+      - type: entities
+        # Title of the entities card
+        title: Lichter
+        # The entities here will be shown in the same order as specified.
+        entities:
+          - light.gateway_light_f0b429cc315f
+          - light.romy_licht
+          - light.wohnzimmer_licht
+          - light.bad_licht
+          - light.speisesaal_licht
+          - light.bettlicht
+
+      - type: entities
+        # Title of the entities card
+        title: Kalender
+        # The entities here will be shown in the same order as specified.
+        entities:
+          - sensor.privat
+          - sensor.geburtstagskalender
+          - sensor.feiertage
+          - sensor.muellabfuhr
+        # The filter card will filter available entities for certain criteria
+        # and render it as type 'entities'.
+      - type: entity-filter
+        # Filter criteria. They are all optional.
+        filter:
+          - domain: alert
+            state: 'on'
+        # This config will be passed to the card rendering the filter results
+        card_config:
+          title: Ausgelöste Alarme
+
+    # Specify a tab_icon if you want the view tab to be an icon.
+  - tab_icon: mdi:floor-plan
+    name: "Räume"
+    cards:
+      - type: entities
+        title: Wohnzimmer
+        entities:
+          - light.wohnzimmer_licht
+          - sensor.humidity_158d00011172f3
+          - sensor.temperature_158d00011172f3
+      - type: entities
+        title: Kinderzimmer
+        entities:
+          - light.romy_licht
+          - sensor.humidity_158d0001100456
+          - sensor.temperature_158d0001100456
+      - type: entities
+        title: "Küche"
+        entities:
+          - light.speisesaal_licht
+          - switch.kaffeemaschine
+          - switch.speisesaal_radio
+      - type: entities
+        title: Flur
+        entities:
+          - light.gateway_light_f0b429cc315f
+          - sensor.illumination_f0b429cc315f
+          - binary_sensor.motion_sensor_158d00010f859c
+      - type: entities
+        title: Badezimmer
+        entities:
+          - light.bad_licht
+          - sensor.humidity_158d00012bf206
+          - sensor.temperature_158d00012bf206
+          - switch.bad_radio
+          - climate.bad
+          - binary_sensor.door_window_sensor_158d000153b0e1
+      - type: entities
+        title: Schlafzimmer
+        entities:
+          - sensor.humidity_158d00012914cb
+          - sensor.temperature_158d00012914cb
+          - light.bettlicht
+  - tab_icon: mdi:settings-outline
+    # Name of the view. Will be used as the tooltip for tab icon
+    name: Automatismen & Hardware
+    cards:
+      - type: entities
+        title: "Akkustände"
+        entities:
+          - sensor.stephans_iphone_battery_level_2
+          - sensor.battery_applewatch
+          - sensor.battery_hygro_wohnzimmer
+          - sensor.battery_hygro_romy
+          - sensor.battery_bewegungsmelder
+          - sensor.battery_hygro_bad
+          - sensor.battery_hygro_schlafzimmer
+          - sensor.battery_badfenster
+
+      - type: entities
+        title: Lichtautomatismen
+        entities:
+            # It is totally possible to render duplicates.
+          - automation.media_player_playing
+          - automation.media_player_pausedstopped
+          - automation.balkon_offen
+          - automation.balkon_geschlossen
+          - automation.fluxer_start
+          - automation.lichter_bei_abwesenheit_aus
+          - automation.lichter_vergessen
+          - automation.nachtlicht_bei_bewegung
+          - automation.nachtlicht_aus
+          - automation.lichtwecker_schlafzimmer
+      - type: entities
+        title: Systemautomatismen
+        entities:
+            # It is totally possible to render duplicates.
+          - automation.update_benachrichtigungen
+          - automation.telegram_erinnerung_an_muelltonnen
+          - automation.telegram_callback_to_remove_keyboard
+          - automation.telegramremoveinline
+          - automation.telegram_erinnerung_an_geburtstage
+      - type: entities
+        title: Strom
+        entities:
+          - automation.kaffee_in_der_woche
+          - automation.kaffee_am_wochenende
+          - automation.kaffeemaschine_aus
+          - automation.radio_an_wochentags
+          - automation.radio_aus_wochentags
+          - automation.radio_an_wochenende
+          - automation.heizung_an_wohnzimmerfenster
+          - automation.heizung_aus_wohnzimmerfenster
+          
