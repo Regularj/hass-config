@@ -186,7 +186,7 @@
 
 ############################################################################
 #                                                                          #
-# Media-Player Automatismen (Licht aus, wenn Film läuft)                   #
+#       Media-Player Automatismen (Licht aus, wenn Film läuft)             #
 #                                                                          #
 ############################################################################
 - id: mediaplayerpaused
@@ -222,7 +222,7 @@
 
 ##########################################################################
 #                                                                        #
-# Wohnzimmerlicht aus, wenn Balkontür auf ist                           # auskommentiert, da Sensor jetzt im Bad
+#          Wohnzimmerlicht aus, wenn Balkontür auf ist                   # auskommentiert, da Sensor jetzt im Bad
 #                                                                        #
 ##########################################################################
 
@@ -294,16 +294,16 @@
 #                                                                       #
 #########################################################################
 
-- id: nachtlicht
-  alias: "Nachtlicht bei Bewegung"
+- id: nachtlicht_flur
+  alias: "Nachtlicht bei Bewegung im Flur"
   condition:
     - condition: numeric_state
       entity_id: sensor.illumination_f0b429cc315f
       value_template: '{{states.sensor.illumination_f0b429cc315f.state | int}}'
-      below: '400'
+      below: 400
   trigger:
     - platform: state
-      entity_id: binary_sensor.motion_sensor_158d00010f859c
+      entity_id: binary_sensor.motion_sensor_158d0001e518a2
       from: 'off'
       to: 'on'
   action:
@@ -312,8 +312,39 @@
       entity_id: light.gateway_light_f0b429cc315f
       color_name: orangered
       brightness: 75
-- id: nachtlichtaus
-  alias: "Nachtlicht aus"
+- id: nachtlichtaus_flur
+  alias: "Nachtlicht aus im Flur"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0001e518a2
+      to: 'off'
+      for:
+        minutes: 0
+        seconds: 15
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.gateway_light_f0b429cc315f
+
+#########################################################################
+#                                                                       #
+#                    Nachtlicht im Schlafzimmer                         #
+#                                                                       #
+#########################################################################
+
+- id: nachtlicht_schlafzimmer
+  alias: "Nachtlicht bei Bewegung im Schlafzimmer"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d00010f859c
+      from: 'off'
+      to: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.bettlicht
+- id: nachtlichtaus_schlafzimmer
+  alias: "Nachtlicht aus im Schlafzimmer"
   trigger:
     - platform: state
       entity_id: binary_sensor.motion_sensor_158d00010f859c
@@ -321,14 +352,10 @@
       for:
         minutes: 0
         seconds: 15
-    - platform: numeric_state
-      entity_id: sensor.illumination_f0b429cc315f
-      value_template: '{{states.sensor.illumination_f0b429cc315f.state | int}}'
-      above: '400'
   action:
     service: light.turn_off
     data:
-      entity_id: light.gateway_light_f0b429cc315f
+      entity_id: light.bettlicht
 
 #########################################################################
 #                                                                       #

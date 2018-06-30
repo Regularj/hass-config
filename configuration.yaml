@@ -70,7 +70,7 @@ group: !include groups.yaml
 light:
   - platform: limitlessled
     bridges:
-      - host: 192.168.0.156
+      - host: 192.168.1.86
         port: 5987
         groups:
         - number: 1

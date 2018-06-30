@@ -178,7 +178,7 @@ flur:
   entities:
   - light.gateway_light_f0b429cc315f
   - sensor.illumination_f0b429cc315f
-  - binary_sensor.motion_sensor_158d00010f859c
+  - binary_sensor.motion_sensor_158d0001e518a2
 bad:
   name: Badezimmer
   entities:
@@ -192,6 +192,7 @@ schlafzimmer:
   entities:
   - sensor.humidity_158d00012914cb
   - sensor.temperature_158d00012914cb
+  - binary_sensor.motion_sensor_158d00010f859c
   - light.bettlicht
 wetterdetails:
   name: Aussenwelt
@@ -267,8 +268,10 @@ automatismenlicht:
   - automation.fluxer_start
   - automation.lichter_bei_abwesenheit_aus
   - automation.lichter_vergessen
-  - automation.nachtlicht_bei_bewegung
-  - automation.nachtlicht_aus
+  - automation.nachtlicht_bei_bewegung_im_schlafzimmer
+  - automation.nachtlicht_aus_im_schlafzimmer
+  - automation.nachtlicht_bei_bewegung_im_flur
+  - automation.nachtlicht_aus_im_flur
   - automation.lichtwecker_schlafzimmer
 automatismensystem:
   name: Systemautomatismen

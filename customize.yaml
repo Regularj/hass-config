@@ -98,7 +98,9 @@ device_tracker.stephans_iphone:
   friendly_name: Stephan
   icon: mdi:cellphone-iphone
 binary_sensor.motion_sensor_158d00010f859c:
-  friendly_name: Bewegungsmelder
+  friendly_name: Bewegungsmelder Schlafzimmer
+binary_sensor.motion_sensor_158d0001e518a2:
+  friendly_name: Bewegungsmelder Flur
 sensor.illumination_f0b429cc315f:
   friendly_name: Helligkeit
   icon: mdi:lightbulb-outline
